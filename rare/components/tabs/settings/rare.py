@@ -4,13 +4,14 @@ import subprocess
 import sys
 from logging import getLogger
 
-from PyQt5.QtCore import QSettings, Qt
-from PyQt5.QtWidgets import QVBoxLayout, QFileDialog, QComboBox, QPushButton, QCheckBox, QGroupBox, QScrollArea
+from PyQt5.QtCore import QSettings
+from PyQt5.QtWidgets import QFileDialog, QComboBox, QPushButton, QCheckBox, QWidget, QSpacerItem, QSizePolicy
 
 from rare.components.tabs.settings.rpc_settings import RPCSettings
 from rare.components.tabs.settings.settings_widget import SettingsWidget
 from rare.utils.extra_widgets import PathEdit
 from rare.utils.utils import get_lang, get_possible_langs
+from .rare_ui import Ui_RareSettings
 
 logger = getLogger("RareSettings")
 
@@ -21,13 +22,11 @@ languages = [
 ]
 
 
-class RareSettings(QScrollArea):
+class RareSettings(QWidget, Ui_RareSettings):
     def __init__(self):
         super(RareSettings, self).__init__()
-        self.widget = QGroupBox(self.tr("Rare settings"))
-        self.widget.setObjectName("group")
-        self.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.setWidgetResizable(True)
+        self.setupUi(self)
+
         # (option_name, group_text, checkbox_text, default
         self.checkboxes = [
             ("sys_tray", self.tr("Hide to System Tray Icon"), self.tr("Exit to System Tray Icon"), True),
@@ -41,7 +40,6 @@ class RareSettings(QScrollArea):
             ("save_size", self.tr("Save size of window after restart"), self.tr("Save size"), False)
         ]
 
-        self.layout = QVBoxLayout()
         self.settings = QSettings()
         img_dir = self.settings.value("img_dir", os.path.expanduser("~/.cache/rare/images/"), type=str)
         language = self.settings.value("language", get_lang(), type=str)
@@ -51,7 +49,7 @@ class RareSettings(QScrollArea):
         self.save_path_button = QPushButton(self.tr("Save"))
         self.save_path_button.clicked.connect(self.save_path)
         self.img_dir = SettingsWidget(self.tr("Image Directory"), self.select_path, self.save_path_button)
-        self.layout.addWidget(self.img_dir)
+        self.layout().replaceWidget(self.img_dir_ph, self.img_dir)
 
         # Select lang
         self.select_lang = QComboBox()
@@ -63,23 +61,22 @@ class RareSettings(QScrollArea):
             self.select_lang.setCurrentIndex(0)
         self.lang_widget = SettingsWidget(self.tr("Language"), self.select_lang)
         self.select_lang.currentIndexChanged.connect(self.update_lang)
-        self.layout.addWidget(self.lang_widget)
+        self.layout().replaceWidget(self.lang_widget_ph, self.lang_widget)
 
         self.rpc = RPCSettings()
-        self.layout.addWidget(self.rpc)
+        self.layout().replaceWidget(self.rpc_ph, self.rpc)
 
+        self.settings_widget = SettingsWidget("Behaviour", None)
         for option, head_text, text, default in self.checkboxes:
             checkbox = SettingsCheckbox(option, text, default)
-            settings_widget = SettingsWidget(head_text, checkbox)
-            self.layout.addWidget(settings_widget)
+            checkbox.setToolTip(head_text)
+            self.settings_widget.layout.addWidget(checkbox)
+        self.settings_widget.layout.addItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.layout().replaceWidget(self.settings_widget_ph, self.settings_widget)
 
         self.open_log_dir = QPushButton(self.tr("Open Log directory"))
-        self.layout.addWidget(self.open_log_dir)
         self.open_log_dir.clicked.connect(self.open_dir)
-
-        self.layout.addStretch()
-        self.widget.setLayout(self.layout)
-        self.setWidget(self.widget)
+        self.layout().addWidget(self.open_log_dir)
 
     def open_dir(self):
         logdir = os.path.expanduser("~/.cache/rare/logs")
