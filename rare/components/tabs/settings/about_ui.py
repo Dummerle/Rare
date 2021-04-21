@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'about.ui'
+# Form implementation generated from reading ui file 'resources/ui/components/tabs/settings/about.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -123,7 +123,9 @@ class Ui_About(object):
         self.dev_lbl.setText(_translate("About", "Rare Developer:"))
         self.lgd_dev_lbl.setText(_translate("About", "Legendary Developer:"))
         self.update_lbl.setText(_translate("About", "Update available: "))
+        self.lgd_dev.setToolTip(_translate("About", "Github"))
         self.lgd_dev.setText(_translate("About", "<a href=\'https://github.com/derrod/\'>derrod</a>"))
+        self.dev.setToolTip(_translate("About", "Github"))
         self.dev.setText(_translate("About", "<a href=\'https://github.com/Dummerle\'>Dummerle</a>"))
         self.update.setText(_translate("About", "update"))
         self.version.setText(_translate("About", "version"))

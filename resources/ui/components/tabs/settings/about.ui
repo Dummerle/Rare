@@ -123,6 +123,9 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="toolTip">
+      <string>Github</string>
+     </property>
      <property name="text">
       <string>&lt;a href='https://github.com/derrod/'&gt;derrod&lt;/a&gt;</string>
      </property>
@@ -138,6 +141,9 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="toolTip">
+      <string>Github</string>
      </property>
      <property name="text">
       <string>&lt;a href='https://github.com/Dummerle'&gt;Dummerle&lt;/a&gt;</string>
