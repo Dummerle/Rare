@@ -79,7 +79,7 @@ class GameSettings(QScrollArea):
                         vdf = os.path.join(c, i, "compatibilitytool.vdf")
                         if os.path.exists(proton) and os.path.exists(vdf):
                             wrapper = '"' + proton + '" run'
-                        self.possible_proton_wrappers.append(wrapper)
+                            self.possible_proton_wrappers.append(wrapper)
             except FileNotFoundError as e:
                 print("Unable to find any Proton version")
 
