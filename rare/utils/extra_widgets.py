@@ -8,6 +8,8 @@ from qtawesome import icon
 
 from rare import style_path
 
+from .pathedit_ui import Ui_PathEdit
+
 
 class FlowLayout(QLayout):
     def __init__(self, parent=None, margin=-1, hspacing=-1, vspacing=-1):
@@ -120,21 +122,19 @@ class ClickableLabel(QLabel):
         super(ClickableLabel, self).__init__()
 
 
-class PathEdit(QWidget):
+class PathEdit(QWidget, Ui_PathEdit):
     def __init__(self, text: str = "",
                  type_of_file: QFileDialog.FileType = QFileDialog.AnyFile,
-                 infotext: str = "", filter: str = None):
+                 filter: str = None, name_filter: str = None, infotext: str = ""):
         super(PathEdit, self).__init__()
+        self.setupUi(self)
+
         self.filter = filter
+        self.name_filter = name_filter
         self.type_of_file = type_of_file
         self.info_text = infotext
-        self.layout = QHBoxLayout()
-        self.text_edit = QLineEdit(text)
-        self.path_select = QPushButton(self.tr("Select Path"))
+        self.text_edit.setText(text)
         self.path_select.clicked.connect(self.set_path)
-        self.layout.addWidget(self.text_edit)
-        self.layout.addWidget(self.path_select)
-        self.setLayout(self.layout)
 
     def setPlaceholderText(self, text: str):
         self.text_edit.setPlaceholderText(text)
@@ -147,6 +147,8 @@ class PathEdit(QWidget):
         dlg.setFileMode(self.type_of_file)
         if self.filter:
             dlg.setFilter([self.filter])
+        if self.name_filter:
+            dlg.setNameFilter(self.name_filter)
         if dlg.exec_():
             names = dlg.selectedFiles()
             self.text_edit.setText(names[0])

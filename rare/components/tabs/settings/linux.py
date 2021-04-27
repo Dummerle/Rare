@@ -1,51 +1,56 @@
 from logging import getLogger
 
-from PyQt5.QtWidgets import QVBoxLayout, QPushButton, QFileDialog, QLineEdit, QGroupBox
+from PyQt5.QtWidgets import QFileDialog, QWidget
 
 from custom_legendary.core import LegendaryCore
 from rare.components.tabs.settings.dxvk import DxvkWidget
-from rare.components.tabs.settings.settings_widget import SettingsWidget
 from rare.utils.extra_widgets import PathEdit
+from .linux_ui import Ui_LinuxSettings
 
 logger = getLogger("LinuxSettings")
 
 
-class LinuxSettings(QGroupBox):
+class LinuxSettings(QWidget, Ui_LinuxSettings):
     def __init__(self, core: LegendaryCore, name="default"):
         super(LinuxSettings, self).__init__()
-        self.layout = QVBoxLayout()
+        self.setupUi(self)
+
         self.name = name
         self.core = core
-        self.setTitle(self.tr("Linux settings"))
-        self.setObjectName("group")
+
         # Wineprefix
-        self.select_path = PathEdit(self.core.lgd.config.get(self.name, "wine_prefix", fallback=""),
+        self.wine_prefix = PathEdit(self.core.lgd.config.get(self.name, "wine_prefix", fallback=""),
                                     type_of_file=QFileDialog.DirectoryOnly,
                                     infotext="Default")
-        self.select_path.text_edit.textChanged.connect(lambda t: self.save_path_button.setDisabled(False))
-        self.save_path_button = QPushButton("Save")
-        self.save_path_button.clicked.connect(lambda: self.save_setting(self.select_path, "wine_prefix"))
-        self.install_dir_widget = SettingsWidget(self.tr("Default Wine Prefix"), self.select_path,
-                                                 self.save_path_button)
-        self.layout.addWidget(self.install_dir_widget)
+        self.wine_prefix.text_edit.textChanged.connect(
+            lambda t: self.wine_prefix.save_path_button.setDisabled(False)
+        )
+        self.wine_prefix.save_path_button.clicked.connect(
+            lambda: self.save_setting(self.wine_prefix, "wine_prefix")
+        )
+        self.wine_prefix.save_path_button.setDisabled(True)
+        self.layout_prefix.addWidget(self.wine_prefix)
 
         # Wine executable
-        self.select_wine_exec = QLineEdit(self.core.lgd.config.get(self.name, "wine_executable", fallback=""))
-        self.save_wine_exec = QPushButton("Save")
-        self.save_wine_exec.clicked.connect(lambda: self.save_setting(self.select_wine_exec, "wine_executable"))
-        self.install_dir_widget = SettingsWidget(self.tr("Default Wine executable"), self.select_wine_exec,
-                                                 self.save_wine_exec)
-        self.layout.addWidget(self.install_dir_widget)
+        self.wine_exec = PathEdit(self.core.lgd.config.get(self.name, "wine_executable", fallback=""),
+                                  type_of_file=QFileDialog.ExistingFile,
+                                  name_filter="Wine executable (wine wine64)",
+                                  infotext="Default")
+        self.wine_exec.text_edit.textChanged.connect(
+            lambda t: self.wine_exec.save_path_button.setDisabled(False)
+        )
+        self.wine_exec.save_path_button.clicked.connect(
+            lambda: self.save_setting(self.wine_exec, "wine_executable")
+        )
+        self.wine_exec.save_path_button.setDisabled(True)
+        self.layout_exec.addWidget(self.wine_exec)
 
         # dxvk
-        self.dxvk_widget = DxvkWidget(core)
-        self.layout.addWidget(self.dxvk_widget)
-        if name == "default":
-            self.layout.addStretch(1)
-        self.setLayout(self.layout)
+        self.dxvk = DxvkWidget(core)
+        self.layout_dxvk.addWidget(self.dxvk)
 
-    def save_setting(self, widget: QLineEdit, setting_name: str):
-        if not self.name in self.core.lgd.config.sections():
+    def save_setting(self, widget: PathEdit, setting_name: str):
+        if self.name not in self.core.lgd.config.sections():
             self.core.lgd.config.add_section(self.name)
 
         self.core.lgd.config.set(self.name, setting_name, widget.text())
@@ -55,4 +60,5 @@ class LinuxSettings(QGroupBox):
             logger.info("Set config of wine_prefix to " + widget.text())
         if self.core.lgd.config[self.name] == {}:
             self.core.lgd.config.remove_section(self.name)
+        widget.save_path_button.setDisabled(True)
         self.core.lgd.save_config()

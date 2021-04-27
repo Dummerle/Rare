@@ -69,10 +69,16 @@ class GameSettings(QScrollArea):
 
             self.possible_proton_wrappers = []
             try:
-                for i in os.listdir(os.path.expanduser("~/.steam/steam/steamapps/common")):
-                    if i.startswith("Proton"):
-                        wrapper = '"' + os.path.join(os.path.expanduser("~/.steam/steam/steamapps/common"), i,
-                                                     "proton") + '" run'
+                compatibilitytools_dirs = [
+                    os.path.expanduser("~/.steam/steam/steamapps/common"),
+                    "/usr/share/steam/compatibilitytools.d"
+                ]
+                for c in compatibilitytools_dirs:
+                    for i in os.listdir(c):
+                        proton = os.path.join(c, i, "proton")
+                        vdf = os.path.join(c, i, "compatibilitytool.vdf")
+                        if os.path.exists(proton) and os.path.exists(vdf):
+                            wrapper = '"' + proton + '" run'
                         self.possible_proton_wrappers.append(wrapper)
             except FileNotFoundError as e:
                 print("Unable to find any Proton version")
@@ -81,14 +87,14 @@ class GameSettings(QScrollArea):
             self.select_proton.addItems(["Don't use Proton"] + self.possible_proton_wrappers)
             self.select_proton.currentIndexChanged.connect(self.change_proton)
             self.select_proton_widget = SettingsWidget(self.tr("Proton Wrapper"), self.select_proton)
-            self.linux_settings.layout.addWidget(self.select_proton_widget)
+            self.linux_settings.layout_proton.addWidget(self.select_proton_widget)
 
             self.proton_prefix = PathEdit("x", QFileDialog.DirectoryOnly)
             self.proton_prefix_accept_button = QPushButton(self.tr("Save"))
             self.proton_prefix_accept_button.clicked.connect(self.update_prefix)
             self.proton_prefix_widget = SettingsWidget(self.tr("Proton prefix"), self.proton_prefix,
                                                        self.proton_prefix_accept_button)
-            self.linux_settings.layout.addWidget(self.proton_prefix_widget)
+            self.linux_settings.layout_proton.addWidget(self.proton_prefix_widget)
 
         # startparams, skip_update_check
 
@@ -98,7 +104,7 @@ class GameSettings(QScrollArea):
 
     def save_line_edit(self, option, value):
         if value != "":
-            if not self.game.app_name in self.core.lgd.config.sections():
+            if not (self.game.app_name in self.core.lgd.config.sections()):
                 self.core.lgd.config.add_section(self.game.app_name)
             self.core.lgd.config.set(self.game.app_name, option, value)
         else:
@@ -215,7 +221,7 @@ class GameSettings(QScrollArea):
         self.title.setText(f"<h2>{self.game.app_title}</h2>")
         if os.name != "nt":
             self.linux_settings.update_game(app_name)
-            self.linux_settings.dxvk_widget.update_settings(app_name)
+            self.linux_settings.dxvk.update_settings(app_name)
             proton = self.core.lgd.config.get(f"{app_name}", "wrapper", fallback="").replace('"', "")
             if proton != "":
                 self.proton_prefix_widget.setVisible(True)
@@ -247,7 +253,7 @@ class LinuxAppSettings(LinuxSettings):
 
     def update_game(self, app_name):
         self.name = app_name
-        self.select_path.text_edit.setText(self.core.lgd.config.get(self.name, "wine_prefix", fallback=""))
-        self.select_wine_exec.setText(self.core.lgd.config.get(self.name, "wine_executable", fallback=""))
-        self.dxvk_widget.name = app_name
-        self.dxvk_widget.more_settings_widget.name = app_name
+        self.wine_prefix.text_edit.setText(self.core.lgd.config.get(self.name, "wine_prefix", fallback=""))
+        self.wine_exec.text_edit.setText(self.core.lgd.config.get(self.name, "wine_executable", fallback=""))
+        self.dxvk.name = app_name
+        self.dxvk.more_settings_widget.name = app_name
