@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LinuxSettings</class>
+ <widget class="QWidget" name="LinuxSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>569</width>
+    <height>454</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>LinuxSettings</string>
+  </property>
+  <layout class="QGridLayout" name="layout_linux">
+   <item row="2" column="0">
+    <layout class="QVBoxLayout" name="layout_dxvk"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="gb_wine">
+     <property name="title">
+      <string>Default Wine Settings</string>
+     </property>
+     <layout class="QGridLayout" name="layout_wine">
+      <item row="1" column="0" alignment="Qt::AlignRight">
+       <widget class="QLabel" name="lbl_exec">
+        <property name="text">
+         <string>Wine executable:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" alignment="Qt::AlignRight">
+       <widget class="QLabel" name="lbl_prefix">
+        <property name="text">
+         <string>Wine prefix:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QFrame" name="frame_prefix">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <layout class="QVBoxLayout" name="layout_prefix"/>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QFrame" name="frame_exec">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <layout class="QVBoxLayout" name="layout_exec"/>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <spacer name="vs_linux">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0">
+    <layout class="QVBoxLayout" name="layout_proton"/>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

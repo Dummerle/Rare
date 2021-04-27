@@ -1,19 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>RPCSettings</class>
+ <widget class="QGroupBox" name="RPCSettings">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>559</width>
-    <height>398</height>
+    <width>167</width>
+    <height>144</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Discord RPC</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout"/>
+  <property name="title">
+   <string>Discord RPC</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1">
+    <widget class="QComboBox" name="enable">
+     <item>
+      <property name="text">
+       <string>When Playing</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Always</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Never</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Show:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QCheckBox" name="show_game">
+     <property name="text">
+      <string>Show Game</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QCheckBox" name="show_os">
+     <property name="text">
+      <string>Show OS</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QCheckBox" name="show_time">
+     <property name="text">
+      <string>Show Time playing</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

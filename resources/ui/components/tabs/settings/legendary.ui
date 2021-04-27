@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LegendarySettings</class>
+ <widget class="QWidget" name="LegendarySettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>647</width>
+    <height>476</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>LegendarySettings</string>
+  </property>
+  <layout class="QGridLayout" name="layout_legendary">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="gb_install_dir">
+     <property name="title">
+      <string>Default Installation Directory</string>
+     </property>
+     <layout class="QVBoxLayout" name="layout_install_dir"/>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="gb_downloads">
+     <property name="title">
+      <string>Download Settings</string>
+     </property>
+     <layout class="QGridLayout" name="layout_downloads">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lbl_max_workers">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Max Workers:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <spacer name="hs_downloads">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="max_worker_select"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="lbl_max_workers_info">
+        <property name="font">
+         <font>
+          <italic>true</italic>
+         </font>
+        </property>
+        <property name="text">
+         <string>Less is slower (0: Default)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <spacer name="vs_legendary">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="gb_clean">
+     <property name="title">
+      <string>Cleanup</string>
+     </property>
+     <layout class="QVBoxLayout" name="layout_clean">
+      <item>
+       <widget class="QPushButton" name="clean_button_without_manifests">
+        <property name="text">
+         <string>Clean, but keep manifests</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="clean_button">
+        <property name="text">
+         <string>Remove everything</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
