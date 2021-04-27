@@ -11,59 +11,112 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>About</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="3">
-    <widget class="QLabel" name="title">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+   <item row="4" column="1">
+    <widget class="QPushButton" name="open_browser">
      <property name="text">
-      <string>&lt;h2&gt;About&lt;/h2&gt;</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <string>Download latest release</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="version_lbl">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+   <item row="2" column="0" alignment="Qt::AlignRight">
+    <widget class="QLabel" name="lbl_version">
      <property name="text">
-      <string>Version: </string>
+      <string>Version:</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="1" colspan="3">
+   <item row="7" column="0" alignment="Qt::AlignRight">
+    <widget class="QLabel" name="lbl_license">
+     <property name="text">
+      <string>License:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="lbl_lgd_dev">
+     <property name="text">
+      <string>Legendary Developer:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QLabel" name="dev">
+     <property name="toolTip">
+      <string>Github</string>
+     </property>
+     <property name="text">
+      <string>&lt;a href='https://github.com/Dummerle'&gt;Dummerle&lt;/a&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" alignment="Qt::AlignRight">
+    <widget class="QLabel" name="lbl_update">
+     <property name="text">
+      <string>Update available:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="version">
+     <property name="text">
+      <string>version</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" alignment="Qt::AlignRight">
+    <widget class="QLabel" name="lbl_dev">
+     <property name="text">
+      <string>Rare Developer:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
     <widget class="QLabel" name="license">
      <property name="text">
       <string>GNU General Public License v3.0</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="license_lbl">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+   <item row="3" column="1">
+    <widget class="QLabel" name="update">
      <property name="text">
-      <string>License:</string>
+      <string>update</string>
      </property>
     </widget>
    </item>
-   <item row="14" column="0" colspan="4">
+   <item row="6" column="1">
+    <widget class="QLabel" name="lgd_dev">
+     <property name="toolTip">
+      <string>Github</string>
+     </property>
+     <property name="text">
+      <string>&lt;a href='https://github.com/derrod/'&gt;derrod&lt;/a&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="0" colspan="3">
+    <widget class="QLabel" name="info_text">
+     <property name="text">
+      <string>This is a beta version, so you can get bugs. If you get a bug, please report it by creating an Issue on &lt;a href='https://github.com/Dummerle/Rare/issues'&gt;Github&lt;/a&gt;. You can also contact me on Discord (Dummerle#7419). Or you can join the &lt;a href='https://discord.gg/YvmABK9YSk'&gt;Discord server&lt;/a&gt;</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="0" colspan="3">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -76,125 +129,25 @@
      </property>
     </spacer>
    </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="dev_lbl">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+   <item row="1" column="0" colspan="3">
+    <widget class="QLabel" name="title">
      <property name="text">
-      <string>Rare Developer:</string>
+      <string>&lt;h2&gt;About&lt;/h2&gt;</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="lgd_dev_lbl">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+   <item row="2" column="2" rowspan="6">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-     <property name="text">
-      <string>Legendary Developer:</string>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
      </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="update_lbl">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Update available: </string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1" colspan="3">
-    <widget class="QLabel" name="lgd_dev">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="toolTip">
-      <string>Github</string>
-     </property>
-     <property name="text">
-      <string>&lt;a href='https://github.com/derrod/'&gt;derrod&lt;/a&gt;</string>
-     </property>
-     <property name="openExternalLinks">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1" colspan="3">
-    <widget class="QLabel" name="dev">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="toolTip">
-      <string>Github</string>
-     </property>
-     <property name="text">
-      <string>&lt;a href='https://github.com/Dummerle'&gt;Dummerle&lt;/a&gt;</string>
-     </property>
-     <property name="openExternalLinks">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1" colspan="3">
-    <widget class="QLabel" name="update">
-     <property name="text">
-      <string>update</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1" colspan="3">
-    <widget class="QLabel" name="version">
-     <property name="text">
-      <string>version</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="4">
-    <widget class="QPushButton" name="open_browser">
-     <property name="text">
-      <string>Download latest release</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="0" colspan="4">
-    <widget class="QLabel" name="info_text">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>This is a beta version, so you can get bugs. If you get a bug, please report it by creating an Issue on &lt;a href='https://github.com/Dummerle/Rare/issues'&gt;Github&lt;/a&gt;. You can also contact me on Discord (Dummerle#7419). Or you can join the &lt;a href='https://discord.gg/YvmABK9YSk'&gt;Discord server&lt;/a&gt;</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-     <property name="openExternalLinks">
-      <bool>true</bool>
-     </property>
-    </widget>
+    </spacer>
    </item>
   </layout>
  </widget>
