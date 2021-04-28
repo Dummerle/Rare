@@ -11,6 +11,25 @@ from rare.components.tabs.settings.settings_widget import SettingsWidget
 from rare.utils.extra_widgets import PathEdit
 
 
+def find_proton_wrappers():
+    possible_proton_wrappers = []
+    try:
+        compatibilitytools_dirs = [
+            os.path.expanduser("~/.steam/steam/steamapps/common"),
+            "/usr/share/steam/compatibilitytools.d"
+        ]
+        for c in compatibilitytools_dirs:
+            for i in os.listdir(c):
+                proton = os.path.join(c, i, "proton")
+                vdf = os.path.join(c, i, "compatibilitytool.vdf")
+                if os.path.exists(proton) and os.path.exists(vdf):
+                    wrapper = '"' + proton + '" run'
+                    possible_proton_wrappers.append(wrapper)
+    except FileNotFoundError as e:
+        print("Unable to find any Proton version")
+    return possible_proton_wrappers
+
+
 class GameSettings(QScrollArea):
     game: Game
     igame: InstalledGame
@@ -67,21 +86,7 @@ class GameSettings(QScrollArea):
             self.linux_settings = LinuxAppSettings(core)
             self.layout.addWidget(self.linux_settings)
 
-            self.possible_proton_wrappers = []
-            try:
-                compatibilitytools_dirs = [
-                    os.path.expanduser("~/.steam/steam/steamapps/common"),
-                    "/usr/share/steam/compatibilitytools.d"
-                ]
-                for c in compatibilitytools_dirs:
-                    for i in os.listdir(c):
-                        proton = os.path.join(c, i, "proton")
-                        vdf = os.path.join(c, i, "compatibilitytool.vdf")
-                        if os.path.exists(proton) and os.path.exists(vdf):
-                            wrapper = '"' + proton + '" run'
-                            self.possible_proton_wrappers.append(wrapper)
-            except FileNotFoundError as e:
-                print("Unable to find any Proton version")
+            self.possible_proton_wrappers = find_proton_wrappers()
 
             self.select_proton = QComboBox()
             self.select_proton.addItems(["Don't use Proton"] + self.possible_proton_wrappers)
@@ -90,10 +95,8 @@ class GameSettings(QScrollArea):
             self.linux_settings.layout_proton.addWidget(self.select_proton_widget)
 
             self.proton_prefix = PathEdit("x", QFileDialog.DirectoryOnly)
-            self.proton_prefix_accept_button = QPushButton(self.tr("Save"))
-            self.proton_prefix_accept_button.clicked.connect(self.update_prefix)
-            self.proton_prefix_widget = SettingsWidget(self.tr("Proton prefix"), self.proton_prefix,
-                                                       self.proton_prefix_accept_button)
+            self.proton_prefix.save_path_button.clicked.connect(self.update_prefix)
+            self.proton_prefix_widget = SettingsWidget(self.tr("Proton prefix"), self.proton_prefix)
             self.linux_settings.layout_proton.addWidget(self.proton_prefix_widget)
 
         # startparams, skip_update_check
@@ -166,10 +169,10 @@ class GameSettings(QScrollArea):
                 self.proton_prefix.text_edit.setText(os.path.expanduser("~/.proton"))
 
                 # Dont use Wine
-                self.linux_settings.select_wine_exec.setText("")
-                self.linux_settings.save_setting(self.linux_settings.select_wine_exec, "wine_exec")
-                self.linux_settings.select_path.text_edit.setText("")
-                self.linux_settings.save_setting(self.linux_settings.select_path, "wine_prefix")
+                self.linux_settings.wine_exec.text_edit.setText("")
+                self.linux_settings.save_setting(self.linux_settings.wine_exec, "wine_exec")
+                self.linux_settings.wine_prefix.text_edit.setText("")
+                self.linux_settings.save_setting(self.linux_settings.wine_prefix, "wine_prefix")
 
         self.core.lgd.save_config()
 
