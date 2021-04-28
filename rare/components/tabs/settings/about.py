@@ -3,8 +3,8 @@ import webbrowser
 from PyQt5.QtWidgets import QWidget
 
 from rare import __version__
+from rare.components.tabs.settings.about_ui import Ui_About
 from rare.utils.utils import get_latest_version
-from .about_ui import Ui_About
 
 
 def versiontuple(v):

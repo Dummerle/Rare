@@ -7,10 +7,10 @@ from logging import getLogger
 from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QFileDialog, QWidget
 
+from rare.components.tabs.settings.rare_ui import Ui_RareSettings
 from rare.components.tabs.settings.rpc_settings import RPCSettings
 from rare.utils.extra_widgets import PathEdit
 from rare.utils.utils import get_lang, get_possible_langs
-from .rare_ui import Ui_RareSettings
 
 logger = getLogger("RareSettings")
 

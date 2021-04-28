@@ -3,9 +3,9 @@ from logging import getLogger
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QWidget
 
 from custom_legendary.core import LegendaryCore
+from rare.components.tabs.settings.legendary_ui import Ui_LegendarySettings
 from rare.utils.extra_widgets import PathEdit
 from rare.utils.utils import get_size
-from .legendary_ui import Ui_LegendarySettings
 
 logger = getLogger("LegendarySettings")
 
@@ -18,7 +18,8 @@ class LegendarySettings(QWidget, Ui_LegendarySettings):
         self.core = core
 
         # Default installation directory
-        self.install_dir = PathEdit(core.get_default_install_dir(), type_of_file=QFileDialog.DirectoryOnly,
+        self.install_dir = PathEdit(core.get_default_install_dir(),
+                                    type_of_file=QFileDialog.DirectoryOnly,
                                     infotext="Default")
         self.install_dir.text_edit.textChanged.connect(
             lambda t: self.install_dir.save_path_button.setDisabled(False)
