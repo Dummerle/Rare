@@ -20,7 +20,7 @@
    <item row="0" column="0">
     <widget class="QGroupBox" name="gb_wine">
      <property name="title">
-      <string>Default Wine Settings</string>
+      <string>Wine Settings</string>
      </property>
      <layout class="QGridLayout" name="layout_wine">
       <item row="1" column="0" alignment="Qt::AlignRight">

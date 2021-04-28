@@ -57,7 +57,7 @@ class Ui_LinuxSettings(object):
     def retranslateUi(self, LinuxSettings):
         _translate = QtCore.QCoreApplication.translate
         LinuxSettings.setWindowTitle(_translate("LinuxSettings", "LinuxSettings"))
-        self.gb_wine.setTitle(_translate("LinuxSettings", "Default Wine Settings"))
+        self.gb_wine.setTitle(_translate("LinuxSettings", "Wine Settings"))
         self.lbl_exec.setText(_translate("LinuxSettings", "Wine executable:"))
         self.lbl_prefix.setText(_translate("LinuxSettings", "Wine prefix:"))
 
