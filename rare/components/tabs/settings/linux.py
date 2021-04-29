@@ -28,7 +28,7 @@ class LinuxSettings(QWidget, Ui_LinuxSettings):
             lambda: self.save_setting(self.wine_prefix, "wine_prefix")
         )
         self.wine_prefix.save_path_button.setDisabled(True)
-        self.layout_prefix.addWidget(self.wine_prefix)
+        self.prefix_layout.addWidget(self.wine_prefix)
 
         # Wine executable
         self.wine_exec = PathEdit(self.core.lgd.config.get(self.name, "wine_executable", fallback=""),
@@ -41,7 +41,7 @@ class LinuxSettings(QWidget, Ui_LinuxSettings):
             lambda: self.save_setting(self.wine_exec, "wine_executable")
         )
         self.wine_exec.save_path_button.setDisabled(True)
-        self.layout_exec.addWidget(self.wine_exec)
+        self.exec_layout.addWidget(self.wine_exec)
 
         # dxvk
         # FIXME: Remove this check when done with per game settings
@@ -49,7 +49,7 @@ class LinuxSettings(QWidget, Ui_LinuxSettings):
             self.dxvk = DxvkSettings(core, self.name)
         else:
             self.dxvk = DxvkWidget(core)
-        self.layout_dxvk.addWidget(self.dxvk)
+        self.dxvk_layout.addWidget(self.dxvk)
 
     def save_setting(self, widget: PathEdit, setting_name: str):
         if self.name not in self.core.lgd.config.sections():

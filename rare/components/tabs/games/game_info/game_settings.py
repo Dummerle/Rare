@@ -83,21 +83,21 @@ class GameSettings(QScrollArea):
         self.layout.addWidget(self.wrapper_widget)
 
         if os.name != "nt":
-            self.linux_settings = LinuxAppSettings(core)
-            self.layout.addWidget(self.linux_settings)
-
             self.possible_proton_wrappers = find_proton_wrappers()
 
             self.select_proton = QComboBox()
             self.select_proton.addItems(["Don't use Proton"] + self.possible_proton_wrappers)
             self.select_proton.currentIndexChanged.connect(self.change_proton)
             self.select_proton_widget = SettingsWidget(self.tr("Proton Wrapper"), self.select_proton)
-            self.linux_settings.layout_proton.addWidget(self.select_proton_widget)
+            self.layout.addWidget(self.select_proton_widget)
 
             self.proton_prefix = PathEdit("x", QFileDialog.DirectoryOnly)
             self.proton_prefix.save_path_button.clicked.connect(self.update_prefix)
             self.proton_prefix_widget = SettingsWidget(self.tr("Proton prefix"), self.proton_prefix)
-            self.linux_settings.layout_proton.addWidget(self.proton_prefix_widget)
+            self.layout.addWidget(self.proton_prefix_widget)
+
+            self.linux_settings = LinuxAppSettings(core)
+            self.layout.addWidget(self.linux_settings)
 
         # startparams, skip_update_check
 
