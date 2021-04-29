@@ -2,13 +2,12 @@ import os
 
 from PyQt5.QtCore import Qt, QRect, QSize, QPoint, pyqtSignal
 from PyQt5.QtGui import QMovie
-from PyQt5.QtWidgets import QLayout, QStyle, QSizePolicy, QLabel, QFileDialog, QHBoxLayout, QWidget, QLineEdit, \
-    QPushButton, QStyleOptionTab, QStylePainter, QTabBar
+from PyQt5.QtWidgets import QLayout, QStyle, QSizePolicy, QLabel, QFileDialog, QHBoxLayout, QWidget, QPushButton, \
+    QStyleOptionTab, QStylePainter, QTabBar
 from qtawesome import icon
 
 from rare import style_path
-
-from .pathedit_ui import Ui_PathEdit
+from rare.utils.pathedit_ui import Ui_PathEdit
 
 
 class FlowLayout(QLayout):

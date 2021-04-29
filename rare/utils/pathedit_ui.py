@@ -14,22 +14,25 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_PathEdit(object):
     def setupUi(self, PathEdit):
         PathEdit.setObjectName("PathEdit")
-        PathEdit.resize(407, 182)
-        self.gridLayout = QtWidgets.QGridLayout(PathEdit)
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout.setObjectName("gridLayout")
+        self.layout_pathedit = QtWidgets.QGridLayout(PathEdit)
+        self.layout_pathedit.setContentsMargins(0, 0, 0, 0)
+        self.layout_pathedit.setObjectName("layout_pathedit")
         self.path_select = QtWidgets.QToolButton(PathEdit)
+        self.path_select.setText("...")
         self.path_select.setObjectName("path_select")
-        self.gridLayout.addWidget(self.path_select, 1, 2, 1, 1)
+        self.layout_pathedit.addWidget(self.path_select, 0, 1, 1, 1)
         self.text_edit = QtWidgets.QLineEdit(PathEdit)
         self.text_edit.setObjectName("text_edit")
-        self.gridLayout.addWidget(self.text_edit, 1, 0, 1, 2)
+        self.layout_pathedit.addWidget(self.text_edit, 0, 0, 1, 1)
+        self.layout_pathedit_save = QtWidgets.QHBoxLayout()
+        self.layout_pathedit_save.setObjectName("layout_pathedit_save")
         spacerItem = QtWidgets.QSpacerItem(40, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem, 2, 0, 1, 1)
+        self.layout_pathedit_save.addItem(spacerItem)
         self.save_path_button = QtWidgets.QPushButton(PathEdit)
         self.save_path_button.setEnabled(True)
         self.save_path_button.setObjectName("save_path_button")
-        self.gridLayout.addWidget(self.save_path_button, 2, 1, 1, 2)
+        self.layout_pathedit_save.addWidget(self.save_path_button)
+        self.layout_pathedit.addLayout(self.layout_pathedit_save, 1, 0, 1, 2)
 
         self.retranslateUi(PathEdit)
         QtCore.QMetaObject.connectSlotsByName(PathEdit)
@@ -37,7 +40,6 @@ class Ui_PathEdit(object):
     def retranslateUi(self, PathEdit):
         _translate = QtCore.QCoreApplication.translate
         PathEdit.setWindowTitle(_translate("PathEdit", "PathEdit"))
-        self.path_select.setText(_translate("PathEdit", "..."))
         self.save_path_button.setText(_translate("PathEdit", "Save"))
 
 
