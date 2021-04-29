@@ -33,7 +33,7 @@
       <string>Wine Settings</string>
      </property>
      <layout class="QGridLayout" name="wine_layout">
-      <item row="1" column="0" alignment="Qt::AlignRight">
+      <item row="2" column="0" alignment="Qt::AlignRight">
        <widget class="QLabel" name="exec_label">
         <property name="text">
          <string>Wine executable:</string>
@@ -47,27 +47,31 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QFrame" name="prefix_frame">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+      <item row="1" column="0">
+       <widget class="QLabel" name="prefix_alignment_label">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
-        <property name="frameShadow">
-         <enum>QFrame::Sunken</enum>
+        <property name="text">
+         <string notr="true"/>
         </property>
-        <layout class="QVBoxLayout" name="prefix_layout"/>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QFrame" name="exec_frame">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+      <item row="3" column="0">
+       <widget class="QLabel" name="exec_alignment_label">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
-        <property name="frameShadow">
-         <enum>QFrame::Sunken</enum>
+        <property name="text">
+         <string notr="true"/>
         </property>
-        <layout class="QVBoxLayout" name="exec_layout"/>
        </widget>
+      </item>
+      <item row="0" column="1" rowspan="2">
+       <layout class="QVBoxLayout" name="prefix_layout"/>
+      </item>
+      <item row="2" column="1" rowspan="2">
+       <layout class="QVBoxLayout" name="exec_layout"/>
       </item>
      </layout>
     </widget>
