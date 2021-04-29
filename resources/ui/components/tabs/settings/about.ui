@@ -48,7 +48,7 @@
       <string>Github</string>
      </property>
      <property name="text">
-      <string>&lt;a href='https://github.com/Dummerle'&gt;Dummerle&lt;/a&gt;</string>
+      <string notr="true">&lt;a href='https://github.com/Dummerle'&gt;Dummerle&lt;/a&gt;</string>
      </property>
      <property name="openExternalLinks">
       <bool>true</bool>
@@ -65,7 +65,7 @@
    <item row="2" column="1">
     <widget class="QLabel" name="version">
      <property name="text">
-      <string>version</string>
+      <string notr="true">error</string>
      </property>
     </widget>
    </item>
@@ -86,7 +86,7 @@
    <item row="3" column="1">
     <widget class="QLabel" name="update">
      <property name="text">
-      <string>update</string>
+      <string notr="true">error</string>
      </property>
     </widget>
    </item>
@@ -96,7 +96,7 @@
       <string>Github</string>
      </property>
      <property name="text">
-      <string>&lt;a href='https://github.com/derrod/'&gt;derrod&lt;/a&gt;</string>
+      <string notr="true">&lt;a href='https://github.com/derrod/'&gt;derrod&lt;/a&gt;</string>
      </property>
      <property name="openExternalLinks">
       <bool>true</bool>
