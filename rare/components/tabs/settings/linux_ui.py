@@ -24,11 +24,13 @@ class Ui_LinuxSettings(object):
         self.wine_layout = QtWidgets.QGridLayout(self.wine_groupbox)
         self.wine_layout.setObjectName("wine_layout")
         self.exec_label = QtWidgets.QLabel(self.wine_groupbox)
+        self.exec_label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.exec_label.setObjectName("exec_label")
-        self.wine_layout.addWidget(self.exec_label, 2, 0, 1, 1, QtCore.Qt.AlignRight)
+        self.wine_layout.addWidget(self.exec_label, 2, 0, 1, 1)
         self.prefix_label = QtWidgets.QLabel(self.wine_groupbox)
+        self.prefix_label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.prefix_label.setObjectName("prefix_label")
-        self.wine_layout.addWidget(self.prefix_label, 0, 0, 1, 1, QtCore.Qt.AlignRight)
+        self.wine_layout.addWidget(self.prefix_label, 0, 0, 1, 1)
         self.prefix_alignment_label = QtWidgets.QLabel(self.wine_groupbox)
         self.prefix_alignment_label.setEnabled(False)
         self.prefix_alignment_label.setText("")
@@ -57,8 +59,8 @@ class Ui_LinuxSettings(object):
         _translate = QtCore.QCoreApplication.translate
         LinuxSettings.setWindowTitle(_translate("LinuxSettings", "LinuxSettings"))
         self.wine_groupbox.setTitle(_translate("LinuxSettings", "Wine Settings"))
-        self.exec_label.setText(_translate("LinuxSettings", "Wine executable:"))
-        self.prefix_label.setText(_translate("LinuxSettings", "Wine prefix:"))
+        self.exec_label.setText(_translate("LinuxSettings", "Executable:"))
+        self.prefix_label.setText(_translate("LinuxSettings", "Prefix:"))
 
 
 if __name__ == "__main__":

@@ -33,17 +33,23 @@
       <string>Wine Settings</string>
      </property>
      <layout class="QGridLayout" name="wine_layout">
-      <item row="2" column="0" alignment="Qt::AlignRight">
+      <item row="2" column="0">
        <widget class="QLabel" name="exec_label">
         <property name="text">
-         <string>Wine executable:</string>
+         <string>Executable:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
-      <item row="0" column="0" alignment="Qt::AlignRight">
+      <item row="0" column="0">
        <widget class="QLabel" name="prefix_label">
         <property name="text">
-         <string>Wine prefix:</string>
+         <string>Prefix:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
