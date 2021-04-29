@@ -26,7 +26,7 @@ class InstallDialog(QDialog):
         if not default_path:
             default_path = os.path.expanduser("~/legendary")
         if not update:
-            self.install_path_field = PathEdit(text=default_path, type_of_file=QFileDialog.DirectoryOnly)
+            self.install_path_field = PathEdit(text=default_path, file_type=QFileDialog.DirectoryOnly)
             self.form.addRow(QLabel("Install directory"), self.install_path_field)
 
         if self.core.lgd.config.has_option("Legendary", "max_workers"):

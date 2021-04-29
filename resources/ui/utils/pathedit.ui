@@ -26,7 +26,17 @@
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QLineEdit" name="text_edit"/>
+    <widget class="QLineEdit" name="text_edit">
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="placeholderText">
+      <string>Default</string>
+     </property>
+    </widget>
    </item>
    <item row="1" column="0" colspan="2">
     <layout class="QHBoxLayout" name="layout_pathedit_save">

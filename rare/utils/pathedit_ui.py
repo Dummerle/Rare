@@ -22,6 +22,7 @@ class Ui_PathEdit(object):
         self.path_select.setObjectName("path_select")
         self.layout_pathedit.addWidget(self.path_select, 0, 1, 1, 1)
         self.text_edit = QtWidgets.QLineEdit(PathEdit)
+        self.text_edit.setMinimumSize(QtCore.QSize(300, 0))
         self.text_edit.setObjectName("text_edit")
         self.layout_pathedit.addWidget(self.text_edit, 0, 0, 1, 1)
         self.layout_pathedit_save = QtWidgets.QHBoxLayout()
@@ -40,6 +41,7 @@ class Ui_PathEdit(object):
     def retranslateUi(self, PathEdit):
         _translate = QtCore.QCoreApplication.translate
         PathEdit.setWindowTitle(_translate("PathEdit", "PathEdit"))
+        self.text_edit.setPlaceholderText(_translate("PathEdit", "Default"))
         self.save_path_button.setText(_translate("PathEdit", "Save"))
 
 

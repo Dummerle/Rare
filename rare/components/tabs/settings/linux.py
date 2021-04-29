@@ -20,8 +20,7 @@ class LinuxSettings(QWidget, Ui_LinuxSettings):
 
         # Wineprefix
         self.wine_prefix = PathEdit(self.core.lgd.config.get(self.name, "wine_prefix", fallback=""),
-                                    type_of_file=QFileDialog.DirectoryOnly,
-                                    infotext="Default")
+                                    file_type=QFileDialog.DirectoryOnly)
         self.wine_prefix.text_edit.textChanged.connect(
             lambda t: self.wine_prefix.save_path_button.setDisabled(False)
         )
@@ -33,9 +32,8 @@ class LinuxSettings(QWidget, Ui_LinuxSettings):
 
         # Wine executable
         self.wine_exec = PathEdit(self.core.lgd.config.get(self.name, "wine_executable", fallback=""),
-                                  type_of_file=QFileDialog.ExistingFile,
-                                  name_filter="Wine executable (wine wine64)",
-                                  infotext="Default")
+                                  file_type=QFileDialog.ExistingFile,
+                                  name_filter="Wine executable (wine wine64)")
         self.wine_exec.text_edit.textChanged.connect(
             lambda t: self.wine_exec.save_path_button.setDisabled(False)
         )

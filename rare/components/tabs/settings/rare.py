@@ -41,7 +41,7 @@ class RareSettings(QWidget, Ui_RareSettings):
         language = self.settings.value("language", get_lang(), type=str)
 
         # Select Image directory
-        self.img_dir = PathEdit(self.img_dir_path, type_of_file=QFileDialog.DirectoryOnly)
+        self.img_dir = PathEdit(self.img_dir_path, file_type=QFileDialog.DirectoryOnly)
         self.img_dir.text_edit.textChanged.connect(lambda t: self.img_dir.save_path_button.setDisabled(False))
         self.img_dir.save_path_button.clicked.connect(self.save_path)
         self.img_dir.save_path_button.setDisabled(True)

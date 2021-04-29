@@ -122,30 +122,32 @@ class ClickableLabel(QLabel):
 
 
 class PathEdit(QWidget, Ui_PathEdit):
-    def __init__(self, text: str = "",
-                 type_of_file: QFileDialog.FileType = QFileDialog.AnyFile,
-                 filter: str = None, name_filter: str = None, infotext: str = ""):
+    def __init__(self,
+                 text: str = "",
+                 file_type: QFileDialog.FileType = QFileDialog.AnyFile,
+                 type_filter: str = None,
+                 name_filter: str = None):
         super(PathEdit, self).__init__()
         self.setupUi(self)
 
-        self.filter = filter
+        self.type_filter = type_filter
         self.name_filter = name_filter
-        self.type_of_file = type_of_file
-        self.info_text = infotext
-        self.text_edit.setText(text)
+        self.file_type = file_type
+        if text:
+            self.text_edit.setText(text)
         self.path_select.clicked.connect(self.set_path)
-
-    def setPlaceholderText(self, text: str):
-        self.text_edit.setPlaceholderText(text)
 
     def text(self):
         return self.text_edit.text()
 
     def set_path(self):
-        dlg = QFileDialog(self, self.tr("Choose Path"), os.path.expanduser("~/"))
-        dlg.setFileMode(self.type_of_file)
-        if self.filter:
-            dlg.setFilter([self.filter])
+        dlg_path = self.text_edit.text()
+        if not dlg_path:
+            dlg_path = os.path.expanduser("~/")
+        dlg = QFileDialog(self, self.tr("Choose Path"), dlg_path)
+        dlg.setFileMode(self.file_type)
+        if self.type_filter:
+            dlg.setFilter([self.type_filter])
         if self.name_filter:
             dlg.setNameFilter(self.name_filter)
         if dlg.exec_():
