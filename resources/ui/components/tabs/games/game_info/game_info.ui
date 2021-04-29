@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GameInfo</class>
+ <widget class="QWidget" name="GameInfo">
+  <property name="windowTitle">
+   <string>Game Info</string>
+  </property>
+  <layout class="QGridLayout" name="layout_game_info">
+   <item row="2" column="1">
+    <layout class="QGridLayout" name="layout_game_info_form">
+     <property name="leftMargin">
+      <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>6</number>
+     </property>
+     <property name="rightMargin">
+      <number>6</number>
+     </property>
+     <property name="bottomMargin">
+      <number>6</number>
+     </property>
+     <property name="spacing">
+      <number>12</number>
+     </property>
+     <item row="4" column="1">
+      <widget class="QLabel" name="install_path">
+       <property name="text">
+        <string notr="true">error</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="version">
+       <property name="text">
+        <string notr="true">error</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="install_size">
+       <property name="text">
+        <string notr="true">error</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lbl_dev">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Developer:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="dev">
+       <property name="text">
+        <string notr="true">error</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="app_name">
+       <property name="text">
+        <string notr="true">error</string>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lbl_version">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Version:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lbl_install_path">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Installation Path:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <spacer name="hs_game_info_form">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="lbl_game_actions">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Game Actions:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lbl_app_name">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Application Name:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lbl_install_size">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Installation Size:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <spacer name="vs_game_info_form">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="5" column="1" alignment="Qt::AlignLeft|Qt::AlignTop">
+      <widget class="QWidget" name="wg_game_actions" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>0</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="layout_game_actions">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="uninstall_button">
+          <property name="text">
+           <string>Uninstall Game</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QStackedWidget" name="verify_widget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="page_verify_button">
+           <layout class="QVBoxLayout" name="layout_verify_button">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="verify_button">
+              <property name="text">
+               <string>Verify Installation</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="page_verify_progress">
+           <layout class="QVBoxLayout" name="layout_verify_progress">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QProgressBar" name="verify_progress">
+              <property name="value">
+               <number>24</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="repair_button">
+          <property name="text">
+           <string>Repair Instalation</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
+    <widget class="QLabel" name="image">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="QLabel" name="game_title">
+     <property name="text">
+      <string notr="true">error</string>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

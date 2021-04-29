@@ -1,13 +1,12 @@
 import os
 
 from PyQt5.QtCore import QSettings
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QComboBox, QFileDialog, QPushButton, QMessageBox, QLineEdit, \
-    QScrollArea, QCheckBox
+from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox
 
 from custom_legendary.core import LegendaryCore
 from custom_legendary.models.game import InstalledGame, Game
+from rare.components.tabs.games.game_info.game_settings_ui import Ui_GameSettings
 from rare.components.tabs.settings.linux import LinuxSettings
-from rare.components.tabs.settings.settings_widget import SettingsWidget
 from rare.utils.extra_widgets import PathEdit
 
 
@@ -31,7 +30,7 @@ def find_proton_wrappers():
     return possible_proton_wrappers
 
 
-class GameSettings(QScrollArea):
+class GameSettings(QWidget, Ui_GameSettings):
     game: Game
     igame: InstalledGame
 
@@ -40,70 +39,39 @@ class GameSettings(QScrollArea):
 
     def __init__(self, core: LegendaryCore, parent):
         super(GameSettings, self).__init__(parent=parent)
+        self.setupUi(self)
+
         self.core = core
-        self.widget = QWidget()
         self.settings = QSettings()
-        self.setWidgetResizable(True)
-        self.layout = QVBoxLayout()
-        self.title = QLabel("Error")
-        self.layout.addWidget(self.title)
-
-        self.offline = QComboBox()
-        self.offline.addItems(["unset", "true", "false"])
-        self.offline_widget = SettingsWidget(self.tr("Launch Game offline"), self.offline)
-        self.offline.currentIndexChanged.connect(lambda x: self.update_combobox(x, "offline"))
-
-        self.skip_update = QComboBox()
-        self.skip_update.addItems(["unset", "true", "false"])
-        self.skip_update_widget = SettingsWidget(self.tr("Skip update check before launching"), self.skip_update)
-        self.layout.addWidget(self.skip_update_widget)
-        self.skip_update.currentIndexChanged.connect(lambda x: self.update_combobox(x, "skip_update_check"))
-
-        self.launch_params = QLineEdit("")
-        self.launch_params.setPlaceholderText(self.tr("Start parameter"))
-        self.launch_params_accept_button = QPushButton(self.tr("Save"))
-        self.launch_params_widget = SettingsWidget(self.tr("Launch parameters"), self.launch_params,
-                                                   self.launch_params_accept_button)
-        self.layout.addWidget(self.launch_params_widget)
-        self.launch_params_accept_button.clicked.connect(
-            lambda: self.save_line_edit("start_params", self.launch_params.text()))
-
-        self.cloud_sync = QCheckBox("Sync with cloud")
-        self.cloud_sync_widget = SettingsWidget(self.tr("Auto sync with cloud"), self.cloud_sync)
-        self.layout.addWidget(self.cloud_sync_widget)
-        self.cloud_sync.stateChanged.connect(lambda: self.settings.setValue(f"{self.game.app_name}/auto_sync_cloud",
-                                                                            self.cloud_sync.isChecked()))
-
-        self.layout.addWidget(self.offline_widget)
-
-        self.wrapper = QLineEdit("")
-        self.wrapper.setPlaceholderText("Wrapper")
-        self.wrapper_save_button = QPushButton(self.tr("Save"))
-        self.wrapper_save_button.clicked.connect(lambda: self.save_line_edit("wrapper", self.wrapper.text()))
-        self.wrapper_widget = SettingsWidget(self.tr("Wrapper (e.g. optirun)"), self.wrapper, self.wrapper_save_button)
-        self.layout.addWidget(self.wrapper_widget)
+        self.offline.currentIndexChanged.connect(
+            lambda x: self.update_combobox(x, "offline")
+        )
+        self.skip_update.currentIndexChanged.connect(
+            lambda x: self.update_combobox(x, "skip_update_check")
+        )
+        self.launch_params_button.clicked.connect(
+            lambda: self.save_line_edit("start_params", self.launch_params.text())
+        )
+        self.cloud_sync.stateChanged.connect(
+            lambda: self.settings.setValue(f"{self.game.app_name}/auto_sync_cloud", self.cloud_sync.isChecked())
+        )
+        self.wrapper_button.clicked.connect(
+            lambda: self.save_line_edit("wrapper", self.wrapper.text())
+        )
 
         if os.name != "nt":
             self.possible_proton_wrappers = find_proton_wrappers()
 
-            self.select_proton = QComboBox()
-            self.select_proton.addItems(["Don't use Proton"] + self.possible_proton_wrappers)
-            self.select_proton.currentIndexChanged.connect(self.change_proton)
-            self.select_proton_widget = SettingsWidget(self.tr("Proton Wrapper"), self.select_proton)
-            self.layout.addWidget(self.select_proton_widget)
+            self.proton_wrapper.addItems(self.possible_proton_wrappers)
+            self.proton_wrapper.currentIndexChanged.connect(self.change_proton)
 
-            self.proton_prefix = PathEdit("x", QFileDialog.DirectoryOnly, save_func=self.update_prefix)
-            self.proton_prefix_widget = SettingsWidget(self.tr("Proton prefix"), self.proton_prefix)
-            self.layout.addWidget(self.proton_prefix_widget)
+            self.proton_prefix = PathEdit("None", QFileDialog.DirectoryOnly, save_func=self.update_prefix)
+            self.proton_prefix_layout.addWidget(self.proton_prefix)
 
             self.linux_settings = LinuxAppSettings(core)
-            self.layout.addWidget(self.linux_settings)
+            self.linux_layout.addWidget(self.linux_settings)
 
         # startparams, skip_update_check
-
-        self.layout.addStretch(1)
-        self.widget.setLayout(self.layout)
-        self.setWidget(self.widget)
 
     def save_line_edit(self, option, value):
         if value != "":
@@ -121,26 +89,27 @@ class GameSettings(QScrollArea):
     def update_combobox(self, i, option):
         if self.change:
             # remove section
-            if i == 0:
+            if i:
+                if not self.core.lgd.config[self.game.app_name]:
+                    self.core.lgd.config.add_section(self.game.app_name)
+                if i == 1:
+                    self.core.lgd.config.set(self.game.app_name, option, "true")
+                if i == 2:
+                    self.core.lgd.config.set(self.game.app_name, option, "false")
+            else:
                 if self.game.app_name in self.core.lgd.config.sections():
                     if self.core.lgd.config.get(f"{self.game.app_name}", option, fallback="") != "":
                         self.core.lgd.config.remove_option(self.game.app_name, option)
                 if self.core.lgd.config[self.game.app_name] == {}:
                     self.core.lgd.config.remove_section(self.game.app_name)
-            elif i == 1:
-                self.core.lgd.config.add_section(self.game.app_name)
-                self.core.lgd.config.set(self.game.app_name, option, "true")
-            elif i == 2:
-                self.core.lgd.config.add_section(self.game.app_name)
-                self.core.lgd.config.set(self.game.app_name, option, "false")
             self.core.lgd.save_config()
 
     def change_proton(self, i):
         if self.change:
             # Dont use Proton
             if i == 0:
-                self.proton_prefix_widget.setVisible(False)
-                self.wrapper_widget.setVisible(True)
+                self.proton_prefix.setEnabled(False)
+                self.wrapper_widget.setEnabled(True)
                 if f"{self.game.app_name}" in self.core.lgd.config.sections():
                     if self.core.lgd.config.get(f"{self.game.app_name}", "wrapper", fallback="") != "":
                         self.core.lgd.config.remove_option(self.game.app_name, "wrapper")
@@ -155,8 +124,8 @@ class GameSettings(QScrollArea):
                     if self.core.lgd.config[self.game.app_name + ".env"] == {}:
                         self.core.lgd.config.remove_section(self.game.app_name + ".env")
             else:
-                self.proton_prefix_widget.setVisible(True)
-                self.wrapper_widget.setVisible(False)
+                self.proton_prefix.setEnabled(True)
+                self.wrapper_widget.setEnabled(False)
                 wrapper = self.possible_proton_wrappers[i - 1]
                 if not self.game.app_name in self.core.lgd.config.sections():
                     self.core.lgd.config[self.game.app_name] = {}
@@ -191,7 +160,6 @@ class GameSettings(QScrollArea):
 
         self.core.lgd.config.set(self.game.app_name + ".env", "STEAM_COMPAT_DATA_PATH", text)
         self.core.lgd.save_config()
-        self.proton_prefix.save_path_button.setDisabled(True)
 
     def update_game(self, app_name):
         self.change = False
@@ -207,9 +175,9 @@ class GameSettings(QScrollArea):
             else:
                 self.offline.setCurrentIndex(0)
 
-            self.offline_widget.setVisible(True)
+            self.offline.setEnabled(True)
         else:
-            self.offline_widget.setVisible(False)
+            self.offline.setEnabled(False)
 
         skip_update = self.core.lgd.config.get(self.game.app_name, "skip_update_check", fallback="unset")
         if skip_update == "true":
@@ -228,22 +196,22 @@ class GameSettings(QScrollArea):
             self.linux_settings.dxvk.update_settings(app_name)
             proton = self.core.lgd.config.get(f"{app_name}", "wrapper", fallback="").replace('"', "")
             if proton != "":
-                self.proton_prefix_widget.setVisible(True)
-                self.select_proton.setCurrentText(f'"{proton.replace(" run", "")}" run')
+                self.proton_prefix.setEnabled(True)
+                self.proton_wrapper.setCurrentText(f'"{proton.replace(" run", "")}" run')
                 proton_prefix = self.core.lgd.config.get(f"{app_name}.env", "STEAM_COMPAT_DATA_PATH",
                                                          fallback=self.tr(
                                                              "Please select path for proton prefix"))
                 self.proton_prefix.text_edit.setText(proton_prefix)
-                self.wrapper_widget.setVisible(False)
+                self.wrapper_widget.setEnabled(False)
             else:
-                self.select_proton.setCurrentIndex(0)
-                self.proton_prefix_widget.setVisible(False)
-                self.wrapper_widget.setVisible(True)
+                self.proton_wrapper.setCurrentIndex(0)
+                self.proton_prefix.setEnabled(False)
+                self.wrapper_widget.setEnabled(True)
 
         if not self.game.supports_cloud_saves:
-            self.cloud_sync_widget.setVisible(False)
+            self.cloud_sync.setEnabled(False)
         else:
-            self.cloud_sync_widget.setVisible(True)
+            self.cloud_sync.setEnabled(True)
             sync_cloud = self.settings.value(f"{self.game.app_name}/auto_sync_cloud", True, bool)
             self.cloud_sync.setChecked(sync_cloud)
 
