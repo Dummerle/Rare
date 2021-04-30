@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'resources/ui/components/tabs/settings/legendary.ui'
+# Form implementation generated from reading ui file 'legendary.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #

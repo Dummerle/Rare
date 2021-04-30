@@ -1,7 +1,7 @@
 from PyQt5.QtCore import QSettings, pyqtSignal
 from PyQt5.QtWidgets import QGroupBox
 
-from rare.components.tabs.settings.rpc_settings_ui import Ui_RPCSettings
+from rare.ui.components.tabs.settings.rpc_settings import Ui_RPCSettings
 
 
 class RPCSettings(QGroupBox, Ui_RPCSettings):

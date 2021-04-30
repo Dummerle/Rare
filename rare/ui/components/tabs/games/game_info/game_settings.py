@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'resources/ui/components/tabs/games/game_info/game_settings.ui'
+# Form implementation generated from reading ui file 'game_settings.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #

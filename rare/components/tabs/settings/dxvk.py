@@ -1,12 +1,11 @@
 from logging import getLogger
 
 from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QWidget, QCheckBox, QVBoxLayout, QWidgetAction, QMenu, QToolButton, QHBoxLayout, QGroupBox
-
 from PyQt5.QtWidgets import QGroupBox
+from PyQt5.QtWidgets import QWidget, QCheckBox, QVBoxLayout, QWidgetAction, QMenu, QToolButton, QHBoxLayout
 
 from custom_legendary.core import LegendaryCore
-from rare.components.tabs.settings.dxvk_ui import Ui_DxvkSettings
+from rare.ui.components.tabs.settings.dxvk import Ui_DxvkSettings
 
 logger = getLogger("DXVK Settings")
 

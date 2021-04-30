@@ -3,7 +3,7 @@ from logging import getLogger
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QWidget
 
 from custom_legendary.core import LegendaryCore
-from rare.components.tabs.settings.legendary_ui import Ui_LegendarySettings
+from rare.ui.components.tabs.settings.legendary import Ui_LegendarySettings
 from rare.utils.extra_widgets import PathEdit
 from rare.utils.utils import get_size
 

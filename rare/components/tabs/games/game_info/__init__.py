@@ -9,8 +9,8 @@ from custom_legendary.core import LegendaryCore
 from custom_legendary.models.game import InstalledGame, Game
 from rare.components.dialogs.uninstall_dialog import UninstallDialog
 from rare.components.tabs.games.game_info.dlcs import DlcTab
-from rare.components.tabs.games.game_info.game_info_ui import Ui_GameInfo
 from rare.components.tabs.games.game_info.game_settings import GameSettings
+from rare.ui.components.tabs.games.game_info.game_info import Ui_GameInfo
 from rare.utils import legendary_utils
 from rare.utils.extra_widgets import SideTabBar
 from rare.utils.legendary_utils import VerifyThread

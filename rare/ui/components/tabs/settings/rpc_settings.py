@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'resources/ui/components/tabs/settings/rpc_settings.ui'
+# Form implementation generated from reading ui file 'rpc_settings.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,8 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_RPCSettings(object):
     def setupUi(self, RPCSettings):
         RPCSettings.setObjectName("RPCSettings")
-        RPCSettings.resize(487, 318)
-        RPCSettings.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        RPCSettings.resize(167, 144)
         self.gridLayout = QtWidgets.QGridLayout(RPCSettings)
         self.gridLayout.setObjectName("gridLayout")
         self.enable = QtWidgets.QComboBox(RPCSettings)

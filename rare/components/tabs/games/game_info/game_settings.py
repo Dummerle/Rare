@@ -5,8 +5,8 @@ from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox
 
 from custom_legendary.core import LegendaryCore
 from custom_legendary.models.game import InstalledGame, Game
-from rare.components.tabs.games.game_info.game_settings_ui import Ui_GameSettings
 from rare.components.tabs.settings.linux import LinuxSettings
+from rare.ui.components.tabs.games.game_info.game_settings import Ui_GameSettings
 from rare.utils.extra_widgets import PathEdit
 
 

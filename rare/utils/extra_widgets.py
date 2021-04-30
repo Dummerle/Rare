@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QLayout, QStyle, QSizePolicy, QLabel, QFileDialog, Q
 from qtawesome import icon
 
 from rare import style_path
-from rare.utils.pathedit_ui import Ui_PathEdit
+from rare.ui.utils.pathedit import Ui_PathEdit
 
 
 class FlowLayout(QLayout):
