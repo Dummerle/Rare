@@ -21,8 +21,9 @@ def find_proton_wrappers():
         for c in compatibilitytools_dirs:
             for i in os.listdir(c):
                 proton = os.path.join(c, i, "proton")
-                vdf = os.path.join(c, i, "compatibilitytool.vdf")
-                if os.path.exists(proton) and os.path.exists(vdf):
+                compatibilitytool = os.path.join(c, i, "compatibilitytool.vdf")
+                toolmanifest = os.path.join(c, i, "toolmanifest.vdf")
+                if os.path.exists(proton) and (os.path.exists(compatibilitytool) or os.path.exists(toolmanifest)):
                     wrapper = '"' + proton + '" run'
                     possible_proton_wrappers.append(wrapper)
     except FileNotFoundError as e:
@@ -191,6 +192,7 @@ class GameSettings(QScrollArea):
 
         self.core.lgd.config.set(self.game.app_name + ".env", "STEAM_COMPAT_DATA_PATH", text)
         self.core.lgd.save_config()
+        self.proton_prefix.save_path_button.setDisabled(True)
 
     def update_game(self, app_name):
         self.change = False
