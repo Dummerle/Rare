@@ -30,13 +30,10 @@
       <string>Launch Settings</string>
      </property>
      <layout class="QGridLayout" name="launch_settings_layout">
-      <item row="3" column="0">
+      <item row="3" column="0" alignment="Qt::AlignRight">
        <widget class="QLabel" name="launch_params_label">
         <property name="text">
          <string>Launch parameters:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -59,33 +56,24 @@
         </item>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="0" column="0" alignment="Qt::AlignRight">
        <widget class="QLabel" name="skip_update_label">
         <property name="text">
          <string>Skip update check:</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="1" column="0" alignment="Qt::AlignRight">
        <widget class="QLabel" name="offline_label">
         <property name="text">
          <string>Offline mode:</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="4" column="0" alignment="Qt::AlignRight">
        <widget class="QLabel" name="wrapper_label">
         <property name="text">
          <string>Wrapper:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -115,13 +103,10 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="2" column="0" alignment="Qt::AlignRight">
        <widget class="QLabel" name="cloud_sync_label">
         <property name="text">
          <string>Sync with cloud:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -198,23 +183,17 @@
       <string>Proton</string>
      </property>
      <layout class="QGridLayout" name="proton_layout">
-      <item row="1" column="0">
+      <item row="1" column="0" alignment="Qt::AlignRight">
        <widget class="QLabel" name="proton_prefix_label">
         <property name="text">
          <string>Prefix:</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="0" column="0" alignment="Qt::AlignRight">
        <widget class="QLabel" name="proton_wrapper_label">
         <property name="text">
          <string>Wrapper:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>

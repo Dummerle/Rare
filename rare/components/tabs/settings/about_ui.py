@@ -28,7 +28,7 @@ class Ui_About(object):
         self.gridLayout.addWidget(self.lbl_license, 7, 0, 1, 1, QtCore.Qt.AlignRight)
         self.lbl_lgd_dev = QtWidgets.QLabel(About)
         self.lbl_lgd_dev.setObjectName("lbl_lgd_dev")
-        self.gridLayout.addWidget(self.lbl_lgd_dev, 6, 0, 1, 1)
+        self.gridLayout.addWidget(self.lbl_lgd_dev, 6, 0, 1, 1, QtCore.Qt.AlignRight)
         self.dev = QtWidgets.QLabel(About)
         self.dev.setText("<a href=\'https://github.com/Dummerle\'>Dummerle</a>")
         self.dev.setOpenExternalLinks(True)

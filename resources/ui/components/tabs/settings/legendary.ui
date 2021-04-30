@@ -28,7 +28,7 @@
       <string>Download Settings</string>
      </property>
      <layout class="QGridLayout" name="layout_downloads">
-      <item row="0" column="0">
+      <item row="0" column="0" alignment="Qt::AlignRight">
        <widget class="QLabel" name="lbl_max_workers">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Maximum" vsizetype="Preferred">

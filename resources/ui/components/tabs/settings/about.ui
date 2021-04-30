@@ -35,7 +35,7 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="0">
+   <item row="6" column="0" alignment="Qt::AlignRight">
     <widget class="QLabel" name="lbl_lgd_dev">
      <property name="text">
       <string>Legendary Developer:</string>

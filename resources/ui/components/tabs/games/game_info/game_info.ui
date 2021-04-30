@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>GameInfo</class>
  <widget class="QWidget" name="GameInfo">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>424</width>
+    <height>308</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Game Info</string>
   </property>
@@ -56,7 +64,7 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
+     <item row="0" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="lbl_dev">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -72,9 +80,6 @@
        </property>
        <property name="text">
         <string>Developer:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -98,7 +103,7 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="2" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="lbl_version">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -115,12 +120,9 @@
        <property name="text">
         <string>Version:</string>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="4" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="lbl_install_path">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -137,9 +139,6 @@
        <property name="text">
         <string>Installation Path:</string>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
       </widget>
      </item>
      <item row="6" column="1">
@@ -155,7 +154,7 @@
        </property>
       </spacer>
      </item>
-     <item row="5" column="0">
+     <item row="5" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="lbl_game_actions">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -172,12 +171,9 @@
        <property name="text">
         <string>Game Actions:</string>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item row="1" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="lbl_app_name">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -194,12 +190,9 @@
        <property name="text">
         <string>Application Name:</string>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="3" column="0" alignment="Qt::AlignRight">
       <widget class="QLabel" name="lbl_install_size">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -215,9 +208,6 @@
        </property>
        <property name="text">
         <string>Installation Size:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>

@@ -33,7 +33,7 @@ class Ui_LegendarySettings(object):
         sizePolicy.setHeightForWidth(self.lbl_max_workers.sizePolicy().hasHeightForWidth())
         self.lbl_max_workers.setSizePolicy(sizePolicy)
         self.lbl_max_workers.setObjectName("lbl_max_workers")
-        self.layout_downloads.addWidget(self.lbl_max_workers, 0, 0, 1, 1)
+        self.layout_downloads.addWidget(self.lbl_max_workers, 0, 0, 1, 1, QtCore.Qt.AlignRight)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.layout_downloads.addItem(spacerItem, 0, 3, 1, 1)
         self.max_worker_select = QtWidgets.QSpinBox(self.gb_downloads)
