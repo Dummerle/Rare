@@ -22,21 +22,39 @@
     </widget>
    </item>
    <item row="2" column="0" alignment="Qt::AlignRight">
-    <widget class="QLabel" name="lbl_version">
+    <widget class="QLabel" name="version_label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
       <string>Version:</string>
      </property>
     </widget>
    </item>
    <item row="7" column="0" alignment="Qt::AlignRight">
-    <widget class="QLabel" name="lbl_license">
+    <widget class="QLabel" name="license_label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
       <string>License:</string>
      </property>
     </widget>
    </item>
    <item row="6" column="0" alignment="Qt::AlignRight">
-    <widget class="QLabel" name="lbl_lgd_dev">
+    <widget class="QLabel" name="lgd_dev_label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
       <string>Legendary Developer:</string>
      </property>
@@ -56,7 +74,13 @@
     </widget>
    </item>
    <item row="3" column="0" alignment="Qt::AlignRight">
-    <widget class="QLabel" name="lbl_update">
+    <widget class="QLabel" name="update_label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
       <string>Update available:</string>
      </property>
@@ -70,7 +94,13 @@
     </widget>
    </item>
    <item row="5" column="0" alignment="Qt::AlignRight">
-    <widget class="QLabel" name="lbl_dev">
+    <widget class="QLabel" name="dev_label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
       <string>Rare Developer:</string>
      </property>
@@ -117,7 +147,7 @@
     </widget>
    </item>
    <item row="15" column="0" colspan="3">
-    <spacer name="verticalSpacer">
+    <spacer name="about_vspacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
@@ -137,7 +167,7 @@
     </widget>
    </item>
    <item row="2" column="2" rowspan="6">
-    <spacer name="horizontalSpacer">
+    <spacer name="about_hspacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>

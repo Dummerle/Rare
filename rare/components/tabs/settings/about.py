@@ -21,7 +21,7 @@ class About(QWidget, Ui_About):
 
         self.version.setText(__version__)
 
-        self.lbl_update.setVisible(False)
+        self.update_label.setVisible(False)
         self.update.setVisible(False)
         self.open_browser.setVisible(False)
 
@@ -35,6 +35,6 @@ class About(QWidget, Ui_About):
 
         if self.update_available:
             print(f"Update available: {__version__} -> {latest_tag}")
-            self.lbl_update.setVisible(True)
+            self.update_label.setVisible(True)
             self.update.setVisible(True)
             self.open_browser.setVisible(True)

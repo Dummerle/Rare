@@ -67,8 +67,8 @@ class App(QApplication):
         self.installTranslator(self.translator)
 
         # Style
-        # self.setStyle(QStyleFactory.create("Fusion"))
-        # self.setStyleSheet(open(style_path + "RareStyle.qss").read())
+        self.setStyle(QStyleFactory.create("Fusion"))
+        self.setStyleSheet(open(style_path + "RareStyle.qss").read())
         self.setWindowIcon(QIcon(style_path + "Logo.png"))
 
         # launch app
