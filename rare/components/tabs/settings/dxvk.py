@@ -73,12 +73,19 @@ class DxvkSettings(QGroupBox, Ui_DxvkSettings):
                 self.core.lgd.config[f"{self.name}.env"]["DXVK_HUD"] = "1"
             if show_dxvk_index == 3:
                 dxvk_options = []
-                for o in self.dxvk_options_map:
-                    if self.dxvk_options_map[o].isChecked():
-                        dxvk_options.append(o)
+                for opt in self.dxvk_options_map:
+                    if self.dxvk_options_map[opt].isChecked():
+                        dxvk_options.append(opt)
                 if not dxvk_options:
-                    dxvk_options = ["devinfo", "fps"]
-                self.core.lgd.config[f"{self.name}.env"]["DXVK_HUD"] = ",".join(dxvk_options)
+                    # Check if this is the first activation
+                    stored = self.core.lgd.config.get(f"{self.name}.env", "DXVK_HUD", fallback=None)
+                    if stored not in [None, "0", "1"]:
+                        self.core.lgd.config[f"{self.name}.env"]["DXVK_HUD"] = "0"
+                    else:
+                        dxvk_options = ["devinfo", "fps"]
+                # Check again if dxvk_options changed due to first activation
+                if dxvk_options:
+                    self.core.lgd.config[f"{self.name}.env"]["DXVK_HUD"] = ",".join(dxvk_options)
         else:
             if self.core.lgd.config.get(f"{self.name}.env", "DXVK_HUD", fallback=None) is not None:
                 self.core.lgd.config.remove_option(f"{self.name}.env", "DXVK_HUD")
@@ -90,7 +97,7 @@ class DxvkSettings(QGroupBox, Ui_DxvkSettings):
 
 class DxvkWidget(QGroupBox):
 
-    def __init__(self, core: LegendaryCore):
+    def __init__(self, core: LegendaryCore, name=None):
         super(DxvkWidget, self).__init__()
         self.core = core
         self.setObjectName("settings_widget")
@@ -103,7 +110,7 @@ class DxvkWidget(QGroupBox):
             "api": [False, self.tr("D3D Level of application")],
             "frametime": [False, self.tr("Frame time graph")]
         }
-        self.name = "default"
+        self.name = name
         self.layout = QVBoxLayout()
         self.child_layout = QHBoxLayout()
         self.setTitle(self.tr("dxvk settings"))
