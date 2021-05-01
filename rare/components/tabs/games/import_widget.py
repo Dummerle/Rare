@@ -55,8 +55,7 @@ class ImportWidget(QWidget):
         self.app_name_input.setLayout(minilayout)
         self.app_name_input.textChanged.connect(self.app_name_changed)
 
-        self.path_edit = PathEdit(os.path.expanduser("~"), QFileDialog.DirectoryOnly)
-        self.path_edit.text_edit.textChanged.connect(self.path_changed)
+        self.path_edit = PathEdit(os.path.expanduser("~"), QFileDialog.DirectoryOnly, edit_func=self.path_changed)
         self.gb_layout.addWidget(self.path_edit)
 
         self.gb_layout.addWidget(self.override_app_name_label)

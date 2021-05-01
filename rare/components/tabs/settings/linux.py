@@ -18,29 +18,17 @@ class LinuxSettings(QWidget, Ui_LinuxSettings):
         self.name = name if name is not None else "default"
         self.core = core
 
-        # Wineprefix
+        # Wine prefix
         self.wine_prefix = PathEdit(self.core.lgd.config.get(self.name, "wine_prefix", fallback=""),
-                                    file_type=QFileDialog.DirectoryOnly)
-        self.wine_prefix.text_edit.textChanged.connect(
-            lambda t: self.wine_prefix.save_path_button.setDisabled(False)
-        )
-        self.wine_prefix.save_path_button.clicked.connect(
-            lambda: self.save_setting(self.wine_prefix, "wine_prefix")
-        )
-        self.wine_prefix.save_path_button.setDisabled(True)
+                                    file_type=QFileDialog.DirectoryOnly,
+                                    save_func=lambda: self.save_setting(self.wine_prefix, "wine_prefix"))
         self.prefix_layout.addWidget(self.wine_prefix)
 
         # Wine executable
         self.wine_exec = PathEdit(self.core.lgd.config.get(self.name, "wine_executable", fallback=""),
                                   file_type=QFileDialog.ExistingFile,
-                                  name_filter="Wine executable (wine wine64)")
-        self.wine_exec.text_edit.textChanged.connect(
-            lambda t: self.wine_exec.save_path_button.setDisabled(False)
-        )
-        self.wine_exec.save_path_button.clicked.connect(
-            lambda: self.save_setting(self.wine_exec, "wine_executable")
-        )
-        self.wine_exec.save_path_button.setDisabled(True)
+                                  name_filter="Wine executable (wine wine64)",
+                                  save_func=lambda: self.save_setting(self.wine_exec, "wine_executable"))
         self.exec_layout.addWidget(self.wine_exec)
 
         # dxvk
@@ -56,11 +44,10 @@ class LinuxSettings(QWidget, Ui_LinuxSettings):
             self.core.lgd.config.add_section(self.name)
 
         self.core.lgd.config.set(self.name, setting_name, widget.text())
-        if widget.text() == "":
+        if not widget.text():
             self.core.lgd.config.remove_option(self.name, setting_name)
         else:
             logger.info("Set config of wine_prefix to " + widget.text())
         if self.core.lgd.config[self.name] == {}:
             self.core.lgd.config.remove_section(self.name)
-        widget.save_path_button.setDisabled(True)
         self.core.lgd.save_config()

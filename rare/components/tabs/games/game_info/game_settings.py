@@ -92,8 +92,7 @@ class GameSettings(QScrollArea):
             self.select_proton_widget = SettingsWidget(self.tr("Proton Wrapper"), self.select_proton)
             self.layout.addWidget(self.select_proton_widget)
 
-            self.proton_prefix = PathEdit("x", QFileDialog.DirectoryOnly)
-            self.proton_prefix.save_path_button.clicked.connect(self.update_prefix)
+            self.proton_prefix = PathEdit("x", QFileDialog.DirectoryOnly, save_func=self.update_prefix)
             self.proton_prefix_widget = SettingsWidget(self.tr("Proton prefix"), self.proton_prefix)
             self.layout.addWidget(self.proton_prefix_widget)
 

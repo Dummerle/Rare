@@ -126,19 +126,35 @@ class PathEdit(QWidget, Ui_PathEdit):
                  text: str = "",
                  file_type: QFileDialog.FileType = QFileDialog.AnyFile,
                  type_filter: str = None,
-                 name_filter: str = None):
+                 name_filter: str = None,
+                 edit_func: callable = None,
+                 save_func: callable = None):
         super(PathEdit, self).__init__()
         self.setupUi(self)
 
         self.type_filter = type_filter
         self.name_filter = name_filter
         self.file_type = file_type
+        self.edit_func = edit_func
+        self.save_func = save_func
         if text:
             self.text_edit.setText(text)
+        if self.edit_func is not None:
+            self.text_edit.textChanged.connect(self.edit_func)
+        if self.save_func is None:
+            self.save_path_button.setVisible(False)
+        else:
+            self.text_edit.textChanged.connect(lambda t: self.save_path_button.setDisabled(False))
+            self.save_path_button.clicked.connect(self.save)
+            self.save_path_button.setDisabled(True)
         self.path_select.clicked.connect(self.set_path)
 
     def text(self):
         return self.text_edit.text()
+
+    def save(self):
+        self.save_func()
+        self.save_path_button.setDisabled(True)
 
     def set_path(self):
         dlg_path = self.text_edit.text()

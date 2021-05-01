@@ -42,10 +42,7 @@ class RareSettings(QWidget, Ui_RareSettings):
         self.logdir = os.path.expanduser("~/.cache/rare/logs")
 
         # Select Image directory
-        self.img_dir = PathEdit(self.img_dir_path, file_type=QFileDialog.DirectoryOnly)
-        self.img_dir.text_edit.textChanged.connect(lambda t: self.img_dir.save_path_button.setDisabled(False))
-        self.img_dir.save_path_button.clicked.connect(self.save_path)
-        self.img_dir.save_path_button.setDisabled(True)
+        self.img_dir = PathEdit(self.img_dir_path, file_type=QFileDialog.DirectoryOnly, save_func=self.save_path)
         self.layout_img_dir.addWidget(self.img_dir)
 
         # Select lang
@@ -98,7 +95,6 @@ class RareSettings(QWidget, Ui_RareSettings):
         self.settings.remove("window_size")
 
     def save_path(self):
-        self.img_dir.save_path_button.setDisabled(True)
         self.update_path()
 
     def update_lang(self, i: int):

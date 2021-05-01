@@ -19,12 +19,8 @@ class LegendarySettings(QWidget, Ui_LegendarySettings):
 
         # Default installation directory
         self.install_dir = PathEdit(core.get_default_install_dir(),
-                                    file_type=QFileDialog.DirectoryOnly)
-        self.install_dir.text_edit.textChanged.connect(
-            lambda t: self.install_dir.save_path_button.setDisabled(False)
-        )
-        self.install_dir.save_path_button.clicked.connect(self.save_path)
-        self.install_dir.save_path_button.setDisabled(True)
+                                    file_type=QFileDialog.DirectoryOnly,
+                                    save_func=self.save_path)
         self.layout_install_dir.addWidget(self.install_dir)
 
         # Max Workers

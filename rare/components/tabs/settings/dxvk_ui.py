@@ -14,7 +14,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_DxvkSettings(object):
     def setupUi(self, DxvkSettings):
         DxvkSettings.setObjectName("DxvkSettings")
-        DxvkSettings.resize(598, 182)
         self.gridLayout = QtWidgets.QGridLayout(DxvkSettings)
         self.gridLayout.setObjectName("gridLayout")
         self.gb_dxvk_options = QtWidgets.QGroupBox(DxvkSettings)
@@ -42,7 +41,7 @@ class Ui_DxvkSettings(object):
         self.fps = QtWidgets.QCheckBox(self.gb_dxvk_options)
         self.fps.setObjectName("fps")
         self.layout_dxvk_options.addWidget(self.fps, 2, 0, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(0, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.layout_dxvk_options.addItem(spacerItem, 0, 3, 4, 1)
         self.gridLayout.addWidget(self.gb_dxvk_options, 2, 0, 1, 3)
         self.lbl_show_dxvk = QtWidgets.QLabel(DxvkSettings)
