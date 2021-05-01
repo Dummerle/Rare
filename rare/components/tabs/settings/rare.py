@@ -39,6 +39,7 @@ class RareSettings(QWidget, Ui_RareSettings):
         self.settings = QSettings()
         self.img_dir_path = self.settings.value("img_dir", os.path.expanduser("~/.cache/rare/images/"), type=str)
         language = self.settings.value("language", get_lang(), type=str)
+        self.logdir = os.path.expanduser("~/.cache/rare/logs")
 
         # Select Image directory
         self.img_dir = PathEdit(self.img_dir_path, file_type=QFileDialog.DirectoryOnly)
@@ -80,17 +81,17 @@ class RareSettings(QWidget, Ui_RareSettings):
             lambda: self.settings.setValue("save_size", self.save_size.isChecked())
         )
 
-        self.open_log_dir = QPushButton(self.tr("Open Log directory"))
-        self.open_log_dir.clicked.connect(self.open_dir)
-        self.layout().addWidget(self.open_log_dir)
+        self.log_dir_open_button.clicked.connect(self.open_dir)
+        # TODO: Implement
+        self.log_dir_clean_button.setVisible(False)
+        self.log_dir_size_label.setVisible(False)
 
     def open_dir(self):
-        logdir = os.path.expanduser("~/.cache/rare/logs")
         if os.name == "nt":
-            os.startfile(logdir)
+            os.startfile(self.logdir)
         else:
             opener = "open" if sys.platform == "darwin" else "xdg-open"
-            subprocess.Popen([opener, logdir])
+            subprocess.Popen([opener, self.logdir])
 
     def save_window_size(self):
         self.settings.setValue("save_size", self.save_size.isChecked())

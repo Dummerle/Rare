@@ -6,8 +6,13 @@
    <string>RareSettings</string>
   </property>
   <layout class="QGridLayout" name="layout_rare">
-   <item row="1" column="1">
-    <layout class="QVBoxLayout" name="layout_rpc"/>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="gb_img_dir">
+     <property name="title">
+      <string>Image Cache Directory</string>
+     </property>
+     <layout class="QVBoxLayout" name="layout_img_dir"/>
+    </widget>
    </item>
    <item row="0" column="1">
     <widget class="QGroupBox" name="gb_lang">
@@ -40,27 +45,6 @@
        </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="2">
-    <spacer name="vs_rare">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="0">
-    <widget class="QGroupBox" name="gb_img_dir">
-     <property name="title">
-      <string>Image Cache DIrectory</string>
-     </property>
-     <layout class="QVBoxLayout" name="layout_img_dir"/>
     </widget>
    </item>
    <item row="1" column="0">
@@ -148,17 +132,66 @@
        </widget>
       </item>
       <item row="0" column="2" rowspan="4">
-       <spacer name="horizontalSpacer">
+       <spacer name="settings_hspacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
+          <width>0</width>
           <height>20</height>
          </size>
         </property>
        </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <spacer name="rare_vspacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
+    <layout class="QVBoxLayout" name="layout_rpc"/>
+   </item>
+   <item row="2" column="1">
+    <widget class="QGroupBox" name="log_dir_group">
+     <property name="title">
+      <string>Logs</string>
+     </property>
+     <layout class="QVBoxLayout" name="log_dir_layout">
+      <item>
+       <widget class="QPushButton" name="log_dir_open_button">
+        <property name="text">
+         <string>Open Log directory</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="log_dir_clean_button">
+        <property name="text">
+         <string>Clean Log directory</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="log_dir_size_label">
+        <property name="text">
+         <string notr="true"/>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
