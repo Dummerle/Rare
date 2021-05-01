@@ -13,12 +13,12 @@ from rare.utils.extra_widgets import PathEdit
 
 def find_proton_wrappers():
     possible_proton_wrappers = []
-    try:
-        compatibilitytools_dirs = [
-            os.path.expanduser("~/.steam/steam/steamapps/common"),
-            "/usr/share/steam/compatibilitytools.d"
-        ]
-        for c in compatibilitytools_dirs:
+    compatibilitytools_dirs = [
+        os.path.expanduser("~/.steam/steam/steamapps/common"),
+        "/usr/share/steam/compatibilitytools.d"
+    ]
+    for c in compatibilitytools_dirs:
+        if os.path.exists(c):
             for i in os.listdir(c):
                 proton = os.path.join(c, i, "proton")
                 compatibilitytool = os.path.join(c, i, "compatibilitytool.vdf")
@@ -26,7 +26,7 @@ def find_proton_wrappers():
                 if os.path.exists(proton) and (os.path.exists(compatibilitytool) or os.path.exists(toolmanifest)):
                     wrapper = '"' + proton + '" run'
                     possible_proton_wrappers.append(wrapper)
-    except FileNotFoundError as e:
+    if not possible_proton_wrappers:
         print("Unable to find any Proton version")
     return possible_proton_wrappers
 
