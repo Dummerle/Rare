@@ -49,15 +49,19 @@ class GameSettings(QWidget, Ui_GameSettings):
         self.skip_update.currentIndexChanged.connect(
             lambda x: self.update_combobox(x, "skip_update_check")
         )
-        self.launch_params_button.clicked.connect(
-            lambda: self.save_line_edit("start_params", self.launch_params.text())
-        )
         self.cloud_sync.stateChanged.connect(
             lambda: self.settings.setValue(f"{self.game.app_name}/auto_sync_cloud", self.cloud_sync.isChecked())
         )
+        self.launch_params.textChanged.connect(lambda: self.launch_params_button.setEnabled(True))
+        self.launch_params_button.clicked.connect(
+            lambda: self.save_line_edit("start_params", self.launch_params.text())
+        )
+        self.launch_params_button.setEnabled(False)
+        self.wrapper.textChanged.connect(lambda: self.wrapper_button.setEnabled(True))
         self.wrapper_button.clicked.connect(
             lambda: self.save_line_edit("wrapper", self.wrapper.text())
         )
+        self.wrapper_button.setEnabled(False)
 
         if os.name != "nt":
             self.possible_proton_wrappers = find_proton_wrappers()
@@ -74,23 +78,24 @@ class GameSettings(QWidget, Ui_GameSettings):
         # startparams, skip_update_check
 
     def save_line_edit(self, option, value):
-        if value != "":
-            if not (self.game.app_name in self.core.lgd.config.sections()):
+        if value:
+            if self.game.app_name not in self.core.lgd.config.sections():
                 self.core.lgd.config.add_section(self.game.app_name)
             self.core.lgd.config.set(self.game.app_name, option, value)
         else:
             if self.game.app_name in self.core.lgd.config.sections() and self.core.lgd.config.get(
-                    f"{self.game.app_name}", option, fallback="") != "":
+                    f"{self.game.app_name}", option, fallback=None) is not None:
                 self.core.lgd.config.remove_option(self.game.app_name, option)
-            if not self.core.lgd.config.get(self.game.app_name):
+            if not self.core.lgd.config[self.game.app_name]:
                 self.core.lgd.config.remove_section(self.game.app_name)
         self.core.lgd.save_config()
+        self.sender().setEnabled(False)
 
     def update_combobox(self, i, option):
         if self.change:
             # remove section
             if i:
-                if not self.core.lgd.config[self.game.app_name]:
+                if self.game.app_name not in self.core.lgd.config.sections():
                     self.core.lgd.config.add_section(self.game.app_name)
                 if i == 1:
                     self.core.lgd.config.set(self.game.app_name, option, "true")
@@ -98,9 +103,9 @@ class GameSettings(QWidget, Ui_GameSettings):
                     self.core.lgd.config.set(self.game.app_name, option, "false")
             else:
                 if self.game.app_name in self.core.lgd.config.sections():
-                    if self.core.lgd.config.get(f"{self.game.app_name}", option, fallback="") != "":
+                    if self.core.lgd.config.get(f"{self.game.app_name}", option, fallback=None) is not None:
                         self.core.lgd.config.remove_option(self.game.app_name, option)
-                if self.core.lgd.config[self.game.app_name] == {}:
+                if not self.core.lgd.config[self.game.app_name]:
                     self.core.lgd.config.remove_section(self.game.app_name)
             self.core.lgd.save_config()
 
@@ -110,6 +115,7 @@ class GameSettings(QWidget, Ui_GameSettings):
             if i == 0:
                 self.proton_prefix.setEnabled(False)
                 self.wrapper_widget.setEnabled(True)
+                self.linux_settings.wine_groupbox.setEnabled(True)
                 if f"{self.game.app_name}" in self.core.lgd.config.sections():
                     if self.core.lgd.config.get(f"{self.game.app_name}", "wrapper", fallback="") != "":
                         self.core.lgd.config.remove_option(self.game.app_name, "wrapper")
@@ -126,6 +132,7 @@ class GameSettings(QWidget, Ui_GameSettings):
             else:
                 self.proton_prefix.setEnabled(True)
                 self.wrapper_widget.setEnabled(False)
+                self.linux_settings.wine_groupbox.setEnabled(False)
                 wrapper = self.possible_proton_wrappers[i - 1]
                 if not self.game.app_name in self.core.lgd.config.sections():
                     self.core.lgd.config[self.game.app_name] = {}
