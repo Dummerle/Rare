@@ -14,7 +14,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_RPCSettings(object):
     def setupUi(self, RPCSettings):
         RPCSettings.setObjectName("RPCSettings")
-        RPCSettings.resize(167, 144)
         self.gridLayout = QtWidgets.QGridLayout(RPCSettings)
         self.gridLayout.setObjectName("gridLayout")
         self.enable = QtWidgets.QComboBox(RPCSettings)
@@ -51,7 +50,7 @@ class Ui_RPCSettings(object):
         self.enable.setItemText(0, _translate("RPCSettings", "When Playing"))
         self.enable.setItemText(1, _translate("RPCSettings", "Always"))
         self.enable.setItemText(2, _translate("RPCSettings", "Never"))
-        self.label.setText(_translate("RPCSettings", "Show:"))
+        self.label.setText(_translate("RPCSettings", "Show"))
         self.show_game.setText(_translate("RPCSettings", "Show Game"))
         self.show_os.setText(_translate("RPCSettings", "Show OS"))
         self.show_time.setText(_translate("RPCSettings", "Show Time playing"))

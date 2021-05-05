@@ -57,8 +57,8 @@ class Ui_LinuxSettings(object):
         _translate = QtCore.QCoreApplication.translate
         LinuxSettings.setWindowTitle(_translate("LinuxSettings", "LinuxSettings"))
         self.wine_groupbox.setTitle(_translate("LinuxSettings", "Wine Settings"))
-        self.exec_label.setText(_translate("LinuxSettings", "Executable:"))
-        self.prefix_label.setText(_translate("LinuxSettings", "Prefix:"))
+        self.exec_label.setText(_translate("LinuxSettings", "Executable"))
+        self.prefix_label.setText(_translate("LinuxSettings", "Prefix"))
 
 
 if __name__ == "__main__":

@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>DxvkSettings</class>
  <widget class="QGroupBox" name="DxvkSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>419</width>
+    <height>185</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>DxvkSettings</string>
   </property>
@@ -15,17 +23,17 @@
       <string>DXVK HUD Options</string>
      </property>
      <layout class="QGridLayout" name="layout_dxvk_options">
-      <item row="2" column="2">
-       <widget class="QCheckBox" name="api">
-        <property name="text">
-         <string>D3D Version</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="2">
        <widget class="QCheckBox" name="version">
         <property name="text">
          <string>DXVK Version</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="fps">
+        <property name="text">
+         <string>FPS</string>
         </property>
        </widget>
       </item>
@@ -43,14 +51,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QCheckBox" name="frametime">
-        <property name="text">
-         <string>Frame Time graph</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
+      <item row="1" column="1">
        <widget class="QCheckBox" name="gpuload">
         <property name="text">
          <string>GPU Usage</string>
@@ -58,13 +59,13 @@
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QCheckBox" name="fps">
+       <widget class="QCheckBox" name="frametime">
         <property name="text">
-         <string>FPS</string>
+         <string>Frame Time graph</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="3" rowspan="4">
+      <item row="0" column="3" rowspan="3">
        <spacer name="hs_dxvk_options">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -76,6 +77,13 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="1" column="2">
+       <widget class="QCheckBox" name="api">
+        <property name="text">
+         <string>D3D Version</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -89,7 +97,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Show HUD:</string>
+      <string>Show HUD</string>
      </property>
     </widget>
    </item>

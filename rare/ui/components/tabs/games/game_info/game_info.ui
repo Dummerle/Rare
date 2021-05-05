@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>424</width>
-    <height>308</height>
+    <width>436</width>
+    <height>317</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -79,7 +79,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Developer:</string>
+        <string>Developer</string>
        </property>
       </widget>
      </item>
@@ -118,7 +118,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Version:</string>
+        <string>Version</string>
        </property>
       </widget>
      </item>
@@ -137,7 +137,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Installation Path:</string>
+        <string>Installation Path</string>
        </property>
       </widget>
      </item>
@@ -169,7 +169,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Game Actions:</string>
+        <string>Actions</string>
        </property>
       </widget>
      </item>
@@ -188,7 +188,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Application Name:</string>
+        <string>Application Name</string>
        </property>
       </widget>
      </item>
@@ -207,7 +207,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Installation Size:</string>
+        <string>Installation Size</string>
        </property>
       </widget>
      </item>

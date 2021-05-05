@@ -30,7 +30,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Version:</string>
+      <string>Version</string>
      </property>
     </widget>
    </item>
@@ -43,7 +43,7 @@
       </font>
      </property>
      <property name="text">
-      <string>License:</string>
+      <string>License</string>
      </property>
     </widget>
    </item>
@@ -56,7 +56,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Legendary Developer:</string>
+      <string>Legendary Developer</string>
      </property>
     </widget>
    </item>
@@ -82,7 +82,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Update available:</string>
+      <string>Update available</string>
      </property>
     </widget>
    </item>
@@ -102,7 +102,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Rare Developer:</string>
+      <string>Rare Developer</string>
      </property>
     </widget>
    </item>

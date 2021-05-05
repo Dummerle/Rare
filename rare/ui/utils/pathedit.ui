@@ -21,7 +21,7 @@
    <item row="0" column="1">
     <widget class="QToolButton" name="path_select">
      <property name="text">
-      <string notr="true">...</string>
+      <string>Browse...</string>
      </property>
     </widget>
    </item>

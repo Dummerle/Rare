@@ -14,7 +14,6 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_GameInfo(object):
     def setupUi(self, GameInfo):
         GameInfo.setObjectName("GameInfo")
-        GameInfo.resize(424, 308)
         self.layout_game_info = QtWidgets.QGridLayout(GameInfo)
         self.layout_game_info.setObjectName("layout_game_info")
         self.layout_game_info_form = QtWidgets.QGridLayout()
@@ -180,12 +179,12 @@ class Ui_GameInfo(object):
     def retranslateUi(self, GameInfo):
         _translate = QtCore.QCoreApplication.translate
         GameInfo.setWindowTitle(_translate("GameInfo", "Game Info"))
-        self.lbl_dev.setText(_translate("GameInfo", "Developer:"))
-        self.lbl_version.setText(_translate("GameInfo", "Version:"))
-        self.lbl_install_path.setText(_translate("GameInfo", "Installation Path:"))
-        self.lbl_game_actions.setText(_translate("GameInfo", "Game Actions:"))
-        self.lbl_app_name.setText(_translate("GameInfo", "Application Name:"))
-        self.lbl_install_size.setText(_translate("GameInfo", "Installation Size:"))
+        self.lbl_dev.setText(_translate("GameInfo", "Developer"))
+        self.lbl_version.setText(_translate("GameInfo", "Version"))
+        self.lbl_install_path.setText(_translate("GameInfo", "Installation Path"))
+        self.lbl_game_actions.setText(_translate("GameInfo", "Actions"))
+        self.lbl_app_name.setText(_translate("GameInfo", "Application Name"))
+        self.lbl_install_size.setText(_translate("GameInfo", "Installation Size"))
         self.uninstall_button.setText(_translate("GameInfo", "Uninstall Game"))
         self.verify_button.setText(_translate("GameInfo", "Verify Installation"))
         self.repair_button.setText(_translate("GameInfo", "Repair Instalation"))

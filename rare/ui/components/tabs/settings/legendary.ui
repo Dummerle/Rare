@@ -37,7 +37,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Max Workers:</string>
+         <string>Max Workers</string>
         </property>
        </widget>
       </item>

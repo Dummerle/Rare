@@ -68,7 +68,7 @@ class Ui_LegendarySettings(object):
         LegendarySettings.setWindowTitle(_translate("LegendarySettings", "LegendarySettings"))
         self.gb_install_dir.setTitle(_translate("LegendarySettings", "Default Installation Directory"))
         self.gb_downloads.setTitle(_translate("LegendarySettings", "Download Settings"))
-        self.lbl_max_workers.setText(_translate("LegendarySettings", "Max Workers:"))
+        self.lbl_max_workers.setText(_translate("LegendarySettings", "Max Workers"))
         self.lbl_max_workers_info.setText(_translate("LegendarySettings", "Less is slower (0: Default)"))
         self.gb_clean.setTitle(_translate("LegendarySettings", "Cleanup"))
         self.clean_button_without_manifests.setText(_translate("LegendarySettings", "Clean, but keep manifests"))
