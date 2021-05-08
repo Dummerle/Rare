@@ -7,7 +7,7 @@ import time
 
 from PyQt5.QtCore import QSettings, QTranslator
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QSystemTrayIcon
+from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QStyleFactory
 
 from custom_legendary.core import LegendaryCore
 from rare import lang_path, style_path
@@ -67,6 +67,7 @@ class App(QApplication):
         self.installTranslator(self.translator)
 
         # Style
+        self.setStyle(QStyleFactory.create("Fusion"))
         self.setStyleSheet(open(style_path + "RareStyle.qss").read())
         self.setWindowIcon(QIcon(style_path + "Logo.png"))
 

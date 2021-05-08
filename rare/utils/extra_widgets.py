@@ -2,11 +2,12 @@ import os
 
 from PyQt5.QtCore import Qt, QRect, QSize, QPoint, pyqtSignal
 from PyQt5.QtGui import QMovie
-from PyQt5.QtWidgets import QLayout, QStyle, QSizePolicy, QLabel, QFileDialog, QHBoxLayout, QWidget, QLineEdit, \
-    QPushButton, QStyleOptionTab, QStylePainter, QTabBar
+from PyQt5.QtWidgets import QLayout, QStyle, QSizePolicy, QLabel, QFileDialog, QHBoxLayout, QWidget, QPushButton, \
+    QStyleOptionTab, QStylePainter, QTabBar
 from qtawesome import icon
 
 from rare import style_path
+from rare.ui.utils.pathedit import Ui_PathEdit
 
 
 class FlowLayout(QLayout):
@@ -120,33 +121,51 @@ class ClickableLabel(QLabel):
         super(ClickableLabel, self).__init__()
 
 
-class PathEdit(QWidget):
-    def __init__(self, text: str = "",
-                 type_of_file: QFileDialog.FileType = QFileDialog.AnyFile,
-                 infotext: str = "", filter: str = None):
+class PathEdit(QWidget, Ui_PathEdit):
+    def __init__(self,
+                 text: str = "",
+                 file_type: QFileDialog.FileType = QFileDialog.AnyFile,
+                 type_filter: str = None,
+                 name_filter: str = None,
+                 edit_func: callable = None,
+                 save_func: callable = None):
         super(PathEdit, self).__init__()
-        self.filter = filter
-        self.type_of_file = type_of_file
-        self.info_text = infotext
-        self.layout = QHBoxLayout()
-        self.text_edit = QLineEdit(text)
-        self.path_select = QPushButton(self.tr("Select Path"))
-        self.path_select.clicked.connect(self.set_path)
-        self.layout.addWidget(self.text_edit)
-        self.layout.addWidget(self.path_select)
-        self.setLayout(self.layout)
+        self.setupUi(self)
 
-    def setPlaceholderText(self, text: str):
-        self.text_edit.setPlaceholderText(text)
+        self.type_filter = type_filter
+        self.name_filter = name_filter
+        self.file_type = file_type
+        self.edit_func = edit_func
+        self.save_func = save_func
+        if text:
+            self.text_edit.setText(text)
+        if self.edit_func is not None:
+            self.text_edit.textChanged.connect(self.edit_func)
+        if self.save_func is None:
+            self.save_path_button.setVisible(False)
+        else:
+            self.text_edit.textChanged.connect(lambda t: self.save_path_button.setDisabled(False))
+            self.save_path_button.clicked.connect(self.save)
+            self.save_path_button.setDisabled(True)
+        self.path_select.clicked.connect(self.set_path)
 
     def text(self):
         return self.text_edit.text()
 
+    def save(self):
+        self.save_func()
+        self.save_path_button.setDisabled(True)
+
     def set_path(self):
-        dlg = QFileDialog(self, self.tr("Choose Path"), os.path.expanduser("~/"))
-        dlg.setFileMode(self.type_of_file)
-        if self.filter:
-            dlg.setFilter([self.filter])
+        dlg_path = self.text_edit.text()
+        if not dlg_path:
+            dlg_path = os.path.expanduser("~/")
+        dlg = QFileDialog(self, self.tr("Choose Path"), dlg_path)
+        dlg.setFileMode(self.file_type)
+        if self.type_filter:
+            dlg.setFilter([self.type_filter])
+        if self.name_filter:
+            dlg.setNameFilter(self.name_filter)
         if dlg.exec_():
             names = dlg.selectedFiles()
             self.text_edit.setText(names[0])

@@ -4,11 +4,11 @@ import subprocess
 import sys
 from logging import getLogger
 
-from PyQt5.QtCore import QSettings, Qt
-from PyQt5.QtWidgets import QVBoxLayout, QFileDialog, QComboBox, QPushButton, QCheckBox, QGroupBox, QScrollArea
+from PyQt5.QtCore import QSettings
+from PyQt5.QtWidgets import QFileDialog, QWidget
 
 from rare.components.tabs.settings.rpc_settings import RPCSettings
-from rare.components.tabs.settings.settings_widget import SettingsWidget
+from rare.ui.components.tabs.settings.rare import Ui_RareSettings
 from rare.utils.extra_widgets import PathEdit
 from rare.utils.utils import get_lang, get_possible_langs
 
@@ -21,89 +21,89 @@ languages = [
 ]
 
 
-class RareSettings(QScrollArea):
+class RareSettings(QWidget, Ui_RareSettings):
     def __init__(self):
         super(RareSettings, self).__init__()
-        self.widget = QGroupBox(self.tr("Rare settings"))
-        self.widget.setObjectName("group")
-        self.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.setWidgetResizable(True)
-        # (option_name, group_text, checkbox_text, default
-        self.checkboxes = [
-            ("sys_tray", self.tr("Hide to System Tray Icon"), self.tr("Exit to System Tray Icon"), True),
-            ("auto_update", self.tr("Automatically update Games on startup"), self.tr("Auto updates"),
-             False),
-            ("confirm_start", self.tr("Confirm launch of game"), self.tr("Confirm launch of game"),
-             False),
-            ("auto_sync_cloud", self.tr("Auto sync with cloud"), self.tr("Sync with cloud"), True),
-            ("notification", self.tr("Show Notifications after Downloads"), self.tr("Show notification"),
-             True),
-            ("save_size", self.tr("Save size of window after restart"), self.tr("Save size"), False)
-        ]
+        self.setupUi(self)
 
-        self.layout = QVBoxLayout()
+        # (widget_name, option_name, default)
+        self.checkboxes = [
+            (self.sys_tray, "sys_tray", True),
+            (self.auto_update, "auto_update", False),
+            (self.confirm_start, "confirm_start", False),
+            (self.auto_sync_cloud, "auto_sync_cloud", True),
+            (self.notification, "notification", True),
+            (self.save_size, "save_size", False)
+       ]
+
         self.settings = QSettings()
-        img_dir = self.settings.value("img_dir", os.path.expanduser("~/.cache/rare/images/"), type=str)
+        self.img_dir_path = self.settings.value("img_dir", os.path.expanduser("~/.cache/rare/images/"), type=str)
         language = self.settings.value("language", get_lang(), type=str)
-        # select Image dir
-        self.select_path = PathEdit(img_dir, type_of_file=QFileDialog.DirectoryOnly)
-        self.select_path.text_edit.textChanged.connect(lambda t: self.save_path_button.setDisabled(False))
-        self.save_path_button = QPushButton(self.tr("Save"))
-        self.save_path_button.clicked.connect(self.save_path)
-        self.img_dir = SettingsWidget(self.tr("Image Directory"), self.select_path, self.save_path_button)
-        self.layout.addWidget(self.img_dir)
+        self.logdir = os.path.expanduser("~/.cache/rare/logs")
+
+        # Select Image directory
+        self.img_dir = PathEdit(self.img_dir_path, file_type=QFileDialog.DirectoryOnly, save_func=self.save_path)
+        self.layout_img_dir.addWidget(self.img_dir)
 
         # Select lang
-        self.select_lang = QComboBox()
         self.select_lang.addItems([i[1] for i in languages])
         if language in get_possible_langs():
             index = [lang[0] for lang in languages].index(language)
             self.select_lang.setCurrentIndex(index)
         else:
             self.select_lang.setCurrentIndex(0)
-        self.lang_widget = SettingsWidget(self.tr("Language"), self.select_lang)
+        self.info_lang.setVisible(False)
         self.select_lang.currentIndexChanged.connect(self.update_lang)
-        self.layout.addWidget(self.lang_widget)
 
         self.rpc = RPCSettings()
-        self.layout.addWidget(self.rpc)
+        self.layout_rpc.addWidget(self.rpc)
 
-        for option, head_text, text, default in self.checkboxes:
-            checkbox = SettingsCheckbox(option, text, default)
-            settings_widget = SettingsWidget(head_text, checkbox)
-            self.layout.addWidget(settings_widget)
+        self.init_checkboxes(self.checkboxes)
+        self.sys_tray.stateChanged.connect(
+            lambda: self.settings.setValue("sys_tray", self.sys_tray.isChecked())
+        )
+        self.auto_update.stateChanged.connect(
+            lambda: self.settings.setValue("auto_update", self.auto_update.isChecked())
+        )
+        self.confirm_start.stateChanged.connect(
+            lambda: self.settings.setValue("confirm_start", self.confirm_start.isChecked())
+        )
+        self.auto_sync_cloud.stateChanged.connect(
+            lambda: self.settings.setValue("auto_sync_cloud", self.auto_sync_cloud.isChecked())
+        )
+        self.notification.stateChanged.connect(
+            lambda: self.settings.setValue("notification", self.notification.isChecked())
+        )
+        self.save_size.stateChanged.connect(
+            lambda: self.settings.setValue("save_size", self.save_size.isChecked())
+        )
 
-        self.open_log_dir = QPushButton(self.tr("Open Log directory"))
-        self.layout.addWidget(self.open_log_dir)
-        self.open_log_dir.clicked.connect(self.open_dir)
-
-        self.layout.addStretch()
-        self.widget.setLayout(self.layout)
-        self.setWidget(self.widget)
+        self.log_dir_open_button.clicked.connect(self.open_dir)
+        # TODO: Implement
+        self.log_dir_clean_button.setVisible(False)
+        self.log_dir_size_label.setVisible(False)
 
     def open_dir(self):
-        logdir = os.path.expanduser("~/.cache/rare/logs")
         if os.name == "nt":
-            os.startfile(logdir)
+            os.startfile(self.logdir)
         else:
             opener = "open" if sys.platform == "darwin" else "xdg-open"
-            subprocess.Popen([opener, logdir])
+            subprocess.Popen([opener, self.logdir])
 
     def save_window_size(self):
         self.settings.setValue("save_size", self.save_size.isChecked())
         self.settings.remove("window_size")
 
     def save_path(self):
-        self.save_path_button.setDisabled(True)
         self.update_path()
 
     def update_lang(self, i: int):
         self.settings.setValue("language", languages[i][0])
-        self.lang_widget.info_text.setText(self.tr("Restart Application to activate changes"))
+        self.info_lang.setVisible(True)
 
     def update_path(self):
-        old_path = self.settings.value("img_dir", type=str)
-        new_path = self.select_path.text()
+        old_path = self.img_dir_path
+        new_path = self.img_dir.text()
 
         if old_path != new_path:
             if not os.path.exists(new_path):
@@ -115,13 +115,10 @@ class RareSettings(QScrollArea):
             for i in os.listdir(old_path):
                 shutil.move(os.path.join(old_path, i), os.path.join(new_path, i))
             os.rmdir(old_path)
+            self.img_dir_path = new_path
             self.settings.setValue("img_dir", new_path)
 
-
-class SettingsCheckbox(QCheckBox):
-    def __init__(self, option, text, default):
-        super(SettingsCheckbox, self).__init__(text)
-        self.option = option
-        self.settings = QSettings()
-        self.setChecked(self.settings.value(option, default, bool))
-        self.stateChanged.connect(lambda: self.settings.setValue(option, self.isChecked()))
+    def init_checkboxes(self, checkboxes):
+        for cb in checkboxes:
+            widget, option, default = cb
+            widget.setChecked(self.settings.value(option, default, bool))
