@@ -103,7 +103,7 @@ class GameSettings(QWidget, Ui_GameSettings):
                     self.core.lgd.config.set(self.game.app_name, option, "false")
             else:
                 if self.game.app_name in self.core.lgd.config.sections():
-                    if self.core.lgd.config.get(f"{self.game.app_name}", option, fallback=None) is not None:
+                    if self.core.lgd.config.get(f"{self.game.app_name}", option, fallback=False):
                         self.core.lgd.config.remove_option(self.game.app_name, option)
                 if not self.core.lgd.config[self.game.app_name]:
                     self.core.lgd.config.remove_section(self.game.app_name)
@@ -117,26 +117,25 @@ class GameSettings(QWidget, Ui_GameSettings):
                 self.wrapper_widget.setEnabled(True)
                 self.linux_settings.wine_groupbox.setEnabled(True)
                 if f"{self.game.app_name}" in self.core.lgd.config.sections():
-                    if self.core.lgd.config.get(f"{self.game.app_name}", "wrapper", fallback="") != "":
+                    if self.core.lgd.config.get(f"{self.game.app_name}", "wrapper", fallback=False):
                         self.core.lgd.config.remove_option(self.game.app_name, "wrapper")
-                    if self.core.lgd.config.get(f"{self.game.app_name}", "no_wine", fallback="") != "":
+                    if self.core.lgd.config.get(f"{self.game.app_name}", "no_wine", fallback=False):
                         self.core.lgd.config.remove_option(self.game.app_name, "no_wine")
-                    if self.core.lgd.config[self.game.app_name] == {}:
+                    if not self.core.lgd.config[self.game.app_name]:
                         self.core.lgd.config.remove_section(self.game.app_name)
                 if f"{self.game.app_name}.env" in self.core.lgd.config.sections():
-                    if self.core.lgd.config.get(f"{self.game.app_name}.env", "STEAM_COMPAT_DATA_PATH",
-                                                fallback="") != "":
+                    if self.core.lgd.config.get(f"{self.game.app_name}.env", "STEAM_COMPAT_DATA_PATH", fallback=False):
                         self.core.lgd.config.remove_option(f"{self.game.app_name}.env", "STEAM_COMPAT_DATA_PATH")
-                    if self.core.lgd.config[self.game.app_name + ".env"] == {}:
+                    if not self.core.lgd.config[self.game.app_name + ".env"]:
                         self.core.lgd.config.remove_section(self.game.app_name + ".env")
             else:
                 self.proton_prefix.setEnabled(True)
                 self.wrapper_widget.setEnabled(False)
                 self.linux_settings.wine_groupbox.setEnabled(False)
                 wrapper = self.possible_proton_wrappers[i - 1]
-                if not self.game.app_name in self.core.lgd.config.sections():
+                if self.game.app_name not in self.core.lgd.config.sections():
                     self.core.lgd.config[self.game.app_name] = {}
-                if not self.game.app_name + ".env" in self.core.lgd.config.sections():
+                if self.game.app_name + ".env" not in self.core.lgd.config.sections():
                     self.core.lgd.config[self.game.app_name + ".env"] = {}
                 self.core.lgd.config.set(self.game.app_name, "wrapper", wrapper)
                 self.core.lgd.config.set(self.game.app_name, "no_wine", "true")
@@ -154,7 +153,7 @@ class GameSettings(QWidget, Ui_GameSettings):
 
     def update_prefix(self):
         text = self.proton_prefix.text()
-        if text == "":
+        if not text:
             text = os.path.expanduser("~/.proton")
             self.proton_prefix.text_edit.setText(text)
         if not os.path.exists(text):
