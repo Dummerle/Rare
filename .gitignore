@@ -6,5 +6,7 @@ __pycache__
 /.vscode
 /build
 /dist
+/deb_dist
+*.tar.gz
 /Rare.egg-info/
 /venv

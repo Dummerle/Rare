@@ -171,15 +171,3 @@ def create_desktop_link(app_name, core: LegendaryCore, type_of_link="desktop"):
                                "StartupWMClass=rare-game\n"
                                )
         os.chmod(os.path.expanduser(f"~/Desktop/{igame.title}.desktop"), 0o755)
-
-    # Windows
-    elif os.name == "nt":
-        if type_of_link == "desktop":
-            path = os.path.expanduser(f"~/Desktop/")
-        elif type_of_link == "start_menu":
-            logger.info("Startmenu link is not supported on windows")
-            return
-        else:
-            return
-        with open(path+igame.title+".bat", "w") as desktop_file:
-            desktop_file.write(f"rare launch {app_name}")
